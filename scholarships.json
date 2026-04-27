@@ -16,7 +16,7 @@
     ],
     "status": "Ready for transfer Fall 2026"
   },
-  "generated": "2026-04-27T13:44:00Z",
+  "generated": "2026-04-27T14:00:00Z",
   "total_opportunities": 180,
   "fall_2026_priority": {
     "count": 38,
@@ -31,7 +31,7 @@
       "deadline": "January 7, 2027",
       "opens": "October 1, 2026",
       "score": 95,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE - Transfer + financial need + GPA profile perfect match",
       "action": "Apply immediately when portal opens October 1, 2026",
       "status": "URGENT - OPENS SOON",
@@ -44,7 +44,7 @@
       "deadline": "January 31, 2027",
       "opens": "October 15, 2026",
       "score": 87,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE - Must join AIAA Day 1 at transfer school",
       "action": "Join AIAA immediately upon enrollment; can apply for 2 scholarships",
       "status": "CRITICAL - OPENS SOON",
@@ -58,7 +58,7 @@
       "deadline": "January 2027",
       "opens": "October 2026",
       "score": 84,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE",
       "action": "Monitor Lockheed Martin careers portal in October 2026",
       "status": "OPENS OCTOBER",
@@ -71,7 +71,7 @@
       "deadline": "February 2027",
       "opens": "November 2026",
       "score": 85,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE (after transfer enrollment)",
       "action": "Secure faculty nomination in first semester; opens Nov 2026",
       "status": "PENDING TRANSFER",
@@ -84,7 +84,7 @@
       "deadline": "March 2027",
       "opens": "January 2027",
       "score": 83,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE - Requires AIAA membership",
       "action": "Join AIAA Day 1; use same application portal",
       "status": "OPENS JANUARY",
@@ -97,7 +97,7 @@
       "deadline": "April 2027",
       "opens": "October 2026",
       "score": 79,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE (after transfer; junior/senior status)",
       "action": "Secure faculty nomination + research participation in first semester",
       "status": "PENDING TRANSFER",
@@ -110,7 +110,7 @@
       "deadline": "February 2027",
       "opens": "October 2026",
       "score": 80,
-      "aerospace_fit": "⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE",
       "action": "Monitor Raytheon (RTX) careers portal October 2026",
       "status": "OPENS OCTOBER",
@@ -123,7 +123,7 @@
       "deadline": "February 2027",
       "opens": "October 2026",
       "score": 79,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE",
       "action": "Monitor P&W careers (propulsion focus) October 2026",
       "status": "OPENS OCTOBER",
@@ -136,7 +136,7 @@
       "deadline": "March 2027",
       "opens": "November 2026",
       "score": 80,
-      "aerospace_fit": "⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "ELIGIBLE",
       "action": "Monitor Boeing careers portal November 2026",
       "status": "OPENS NOVEMBER",
@@ -149,7 +149,7 @@
       "deadline": "March 2027",
       "opens": "November 2026",
       "score": 93,
-      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "aerospace_fit": "\u2b50\u2b50\u2b50\u2b50\u2b50",
       "eligibility": "REQUIRES VERIFICATION",
       "action": "URGENT: Verify exact program name with NASA ARMD",
       "status": "VERIFICATION NEEDED",
@@ -209,9 +209,9 @@
     "tier_1_likely": {
       "label": "Tier 1 - Highly Likely (80%+ probability)",
       "items": [
-        "Jack Kent Cooke: $55K/year × 2-3 years = $110-165K",
+        "Jack Kent Cooke: $55K/year \u00d7 2-3 years = $110-165K",
         "Phi Theta Kappa Transfer: $2-5K",
-        "Institutional Aid: $2-8K/year × 2-3 = $8-24K"
+        "Institutional Aid: $2-8K/year \u00d7 2-3 = $8-24K"
       ],
       "subtotal_low": 120000,
       "subtotal_high": 194000
@@ -271,6 +271,17 @@
     "consolidated_aiaa_scholarships": 6,
     "final_clean_count": 180
   },
-  "last_updated": "2026-04-27T13:44:00Z",
-  "next_review": "2026-09-01T00:00:00Z"
+  "last_updated": "2026-04-27T14:00:00Z",
+  "next_review": "2026-09-01T00:00:00Z",
+  "money_ranked_data": {
+    "file": "FALL_2026_MONEY_RANKED.csv",
+    "summary_file": "FALL_2026_SUMMARY.json",
+    "action_checklist": "THIS_WEEK_APPLY.md",
+    "total_scholarships": 86,
+    "apply_this_week": 24,
+    "opens_soon_prep": 12,
+    "total_potential": "$1,200,000+",
+    "highest_award": "$55,000/year (Jack Kent Cooke)",
+    "methodology": "Ranked by: (1) Fund arrival by Fall 2026, (2) Award amount highest first, (3) Application status"
+  }
 }
