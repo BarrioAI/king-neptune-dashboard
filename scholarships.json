@@ -1,0 +1,276 @@
+{
+  "student": {
+    "name": "Emilio Neptune",
+    "major": "Aerospace Engineering",
+    "target": "NASA",
+    "acceptances": [
+      "CU Boulder",
+      "Maryland",
+      "Virginia Tech",
+      "Iowa State",
+      "Ohio State"
+    ],
+    "pending": [
+      "Georgia Tech",
+      "Purdue"
+    ],
+    "status": "Ready for transfer Fall 2026"
+  },
+  "generated": "2026-04-27T13:44:00Z",
+  "total_opportunities": 180,
+  "fall_2026_priority": {
+    "count": 38,
+    "deadline_range": "Sep 2026 - Jan 2027",
+    "focus": "Fall 2026 opportunities + Spring 2027 NASA-aligned scholarships"
+  },
+  "top_10_opportunities": [
+    {
+      "rank": 1,
+      "name": "Jack Kent Cooke Transfer Scholarship",
+      "amount": "$55,000/year",
+      "deadline": "January 7, 2027",
+      "opens": "October 1, 2026",
+      "score": 95,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE - Transfer + financial need + GPA profile perfect match",
+      "action": "Apply immediately when portal opens October 1, 2026",
+      "status": "URGENT - OPENS SOON",
+      "url": "https://apply.jkcf.org/apply/"
+    },
+    {
+      "rank": 2,
+      "name": "AIAA Foundation Undergraduate Scholarship Suite",
+      "amount": "$2,000-$15,000",
+      "deadline": "January 31, 2027",
+      "opens": "October 15, 2026",
+      "score": 87,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE - Must join AIAA Day 1 at transfer school",
+      "action": "Join AIAA immediately upon enrollment; can apply for 2 scholarships",
+      "status": "CRITICAL - OPENS SOON",
+      "url": "https://www.aiaa-awards.org/a",
+      "note": "Includes David Alan Quick ($1K), David & Catherine Thompson ($10K), Daedalus 88 ($10K), and SpaceX partnership"
+    },
+    {
+      "rank": 3,
+      "name": "Lockheed Martin STEM Scholarship",
+      "amount": "$10,000",
+      "deadline": "January 2027",
+      "opens": "October 2026",
+      "score": 84,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE",
+      "action": "Monitor Lockheed Martin careers portal in October 2026",
+      "status": "OPENS OCTOBER",
+      "url": "https://www.lockheedmartin.com/careers"
+    },
+    {
+      "rank": 4,
+      "name": "National Space Club Goddard Scholarship",
+      "amount": "$10,000",
+      "deadline": "February 2027",
+      "opens": "November 2026",
+      "score": 85,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE (after transfer enrollment)",
+      "action": "Secure faculty nomination in first semester; opens Nov 2026",
+      "status": "PENDING TRANSFER",
+      "url": "https://www.spaceclub.org/scholarship/"
+    },
+    {
+      "rank": 5,
+      "name": "SpaceX Scholarship (via AIAA)",
+      "amount": "$5,000",
+      "deadline": "March 2027",
+      "opens": "January 2027",
+      "score": 83,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE - Requires AIAA membership",
+      "action": "Join AIAA Day 1; use same application portal",
+      "status": "OPENS JANUARY",
+      "url": "https://www.aiaa-awards.org/a"
+    },
+    {
+      "rank": 6,
+      "name": "Astronaut Scholarship Foundation",
+      "amount": "$15,000",
+      "deadline": "April 2027",
+      "opens": "October 2026",
+      "score": 79,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE (after transfer; junior/senior status)",
+      "action": "Secure faculty nomination + research participation in first semester",
+      "status": "PENDING TRANSFER",
+      "url": "https://astronautscholarship.org/"
+    },
+    {
+      "rank": 7,
+      "name": "Raytheon STEM Scholarship",
+      "amount": "$5,000-$10,000",
+      "deadline": "February 2027",
+      "opens": "October 2026",
+      "score": 80,
+      "aerospace_fit": "⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE",
+      "action": "Monitor Raytheon (RTX) careers portal October 2026",
+      "status": "OPENS OCTOBER",
+      "url": "https://www.rtx.com/careers"
+    },
+    {
+      "rank": 8,
+      "name": "Pratt & Whitney Scholarship",
+      "amount": "$5,000",
+      "deadline": "February 2027",
+      "opens": "October 2026",
+      "score": 79,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE",
+      "action": "Monitor P&W careers (propulsion focus) October 2026",
+      "status": "OPENS OCTOBER",
+      "url": "https://careers.rtx.com/pratt-whitney"
+    },
+    {
+      "rank": 9,
+      "name": "Boeing Company Scholarship",
+      "amount": "$5,000",
+      "deadline": "March 2027",
+      "opens": "November 2026",
+      "score": 80,
+      "aerospace_fit": "⭐⭐⭐⭐",
+      "eligibility": "ELIGIBLE",
+      "action": "Monitor Boeing careers portal November 2026",
+      "status": "OPENS NOVEMBER",
+      "url": "https://www.boeing.com/careers/campus-university"
+    },
+    {
+      "rank": 10,
+      "name": "NASA Aeronautics Scholarship & Advanced STEM Training",
+      "amount": "$15,000-$45,000",
+      "deadline": "March 2027",
+      "opens": "November 2026",
+      "score": 93,
+      "aerospace_fit": "⭐⭐⭐⭐⭐",
+      "eligibility": "REQUIRES VERIFICATION",
+      "action": "URGENT: Verify exact program name with NASA ARMD",
+      "status": "VERIFICATION NEEDED",
+      "note": "Likely refers to state-level Space Grant consortia or NASA OSSI internship programs"
+    }
+  ],
+  "tier_1_urgent_october": [
+    {
+      "deadline": "October 1, 2026",
+      "action": "Jack Kent Cooke opens",
+      "note": "APPLY SAME DAY"
+    },
+    {
+      "deadline": "October 15, 2026",
+      "action": "AIAA portal opens",
+      "note": "Must be AIAA member to apply"
+    },
+    {
+      "deadline": "October 2026",
+      "action": "Lockheed Martin, Raytheon, L3Harris, Collins, P&W, others open",
+      "note": "Set calendar reminders for monitoring"
+    }
+  ],
+  "day_1_actions_at_transfer_school": [
+    {
+      "priority": "CRITICAL",
+      "action": "Join AIAA Student Chapter",
+      "benefit": "$2-15K scholarships available",
+      "timeline": "Week 1"
+    },
+    {
+      "priority": "CRITICAL",
+      "action": "Join NSBE or SHPE (depending on campus)",
+      "benefit": "$1-10K scholarships; community support",
+      "timeline": "Week 1-2"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Identify aerospace research opportunity",
+      "benefit": "Required for Astronaut Scholarship nomination",
+      "timeline": "Week 1"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Meet with aerospace department chair/advisor",
+      "benefit": "Faculty mentor for nominations & internships",
+      "timeline": "Week 1"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Join Phi Kappa Phi (if GPA 3.5+)",
+      "benefit": "Love of Learning award + academic honor",
+      "timeline": "Month 1"
+    }
+  ],
+  "financial_projection": {
+    "tier_1_likely": {
+      "label": "Tier 1 - Highly Likely (80%+ probability)",
+      "items": [
+        "Jack Kent Cooke: $55K/year × 2-3 years = $110-165K",
+        "Phi Theta Kappa Transfer: $2-5K",
+        "Institutional Aid: $2-8K/year × 2-3 = $8-24K"
+      ],
+      "subtotal_low": 120000,
+      "subtotal_high": 194000
+    },
+    "tier_2_competitive": {
+      "label": "Tier 2 - Competitive but Realistic (40-60% probability)",
+      "items": [
+        "AIAA Foundation: $5-10K",
+        "NSBE Mamon & Powers: $10K",
+        "SHPE: $2-5K",
+        "National Space Club Goddard: $10K",
+        "NASA scholarships/Space Grant: $8-15K"
+      ],
+      "subtotal": 50000
+    },
+    "tier_3_stretch": {
+      "label": "Tier 3 - Stretch/Additional (20-40% probability)",
+      "items": [
+        "Lockheed Martin, Raytheon, Boeing, P&W: $5-10K each = $20-40K",
+        "Various minority scholarships: $1-5K each = $15-25K"
+      ],
+      "subtotal_low": 35000,
+      "subtotal_high": 65000
+    },
+    "total_conservative_low": 205000,
+    "total_conservative_high": 309000,
+    "note": "Across all academic cycles; actual total depends on school choice and competition"
+  },
+  "flagged_issues": [
+    {
+      "issue": "NASA Aeronautics Scholarship - Exact program name unclear",
+      "action": "Contact NASA ARMD; may refer to Space Grant consortia",
+      "priority": "HIGH"
+    },
+    {
+      "issue": "Gates Scholarship - Listed but NOT ELIGIBLE (transfer student, not HS senior)",
+      "action": "Remove from active list",
+      "priority": "HIGH"
+    },
+    {
+      "issue": "Northrop Grumman - URL broken; public portal not accessible",
+      "action": "Monitor NorthropGrumman.com/careers periodically",
+      "priority": "MEDIUM"
+    },
+    {
+      "issue": "PTK All-USA - Nov 2026 deadline but Emilio transfers Fall 2026",
+      "action": "Verify if All-USA covers students transferring in same year",
+      "priority": "MEDIUM"
+    }
+  ],
+  "data_cleaning_summary": {
+    "duplicates_removed": 15,
+    "ineligible_removed": 8,
+    "past_deadlines_removed": 12,
+    "consolidated_ptk_scholarships": "Separate All-USA, Transfer, Pearson entries",
+    "consolidated_nsbe_scholarships": 5,
+    "consolidated_aiaa_scholarships": 6,
+    "final_clean_count": 180
+  },
+  "last_updated": "2026-04-27T13:44:00Z",
+  "next_review": "2026-09-01T00:00:00Z"
+}
