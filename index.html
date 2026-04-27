@@ -2,1699 +2,506 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>King Neptune | College Cash Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>King Neptune | Emilio's Grant Dashboard</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a1628;color:#e8eaf0;min-height:100vh;overflow-x:hidden}
-a{color:#00b4d8;text-decoration:none}
-a:hover{text-decoration:underline}
-button{cursor:pointer;font-family:inherit}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* HEADER */
-.site-header{position:sticky;top:0;z-index:100;background:#060f1e;border-bottom:1px solid rgba(245,166,35,0.2);box-shadow:0 2px 20px rgba(0,0,0,0.5)}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 6px}
-.logo{font-size:1.2rem;font-weight:800;color:#f5a623;letter-spacing:-0.5px}
-.logo span{margin-left:6px}
-.tagline{font-size:0.7rem;color:#7a8ca8;text-align:right}
-.tab-nav{display:flex;overflow-x:auto;scrollbar-width:none;gap:2px;padding:0 10px 10px}
-.tab-nav::-webkit-scrollbar{display:none}
-.tab-btn{flex-shrink:0;padding:8px 14px;border:none;border-radius:20px;background:rgba(255,255,255,0.05);color:#9aa8bc;font-size:0.8rem;font-weight:600;transition:all 0.2s;white-space:nowrap}
-.tab-btn.active{background:#f5a623;color:#0a1628}
-.tab-btn:hover:not(.active){background:rgba(245,166,35,0.15);color:#f5a623}
+:root {
+  --gold: #f5a623;
+  --gold-dim: rgba(245,166,35,0.15);
+  --gold-border: rgba(245,166,35,0.3);
+  --bg-deep: #060e1d;
+  --bg-card: #0d1f3c;
+  --bg-card2: #0a1628;
+  --text: #e8eaf0;
+  --text-dim: #7a8ca8;
+  --blue: #00b4d8;
+  --red: #ff4d4d;
+  --orange: #ff8c00;
+  --green: #00c96e;
+  --yellow: #ffd700;
+}
 
-/* STATS BAR */
-.stats-bar{display:flex;gap:16px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:#0d1f3c;border-bottom:1px solid rgba(255,255,255,0.05)}
-.stats-bar::-webkit-scrollbar{display:none}
-.stat-item{flex-shrink:0;text-align:center}
-.stat-num{font-size:1.1rem;font-weight:800;color:#f5a623;display:block}
-.stat-label{font-size:0.65rem;color:#7a8ca8;text-transform:uppercase;letter-spacing:0.5px}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* SECTIONS */
-.section{display:none;padding:16px;max-width:1100px;margin:0 auto}
-.section.active{display:block}
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* SECTION TITLES */
-.section-title{font-size:1.3rem;font-weight:800;color:#f5a623;margin-bottom:4px}
-.section-sub{font-size:0.8rem;color:#7a8ca8;margin-bottom:20px}
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--gold-border);
+  padding: 14px 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-logo {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid var(--gold);
+  object-fit: cover;
+}
+.header-text h1 { font-size: 1.1rem; font-weight: 800; color: var(--gold); }
+.header-text p { font-size: 0.7rem; color: var(--text-dim); margin-top: 1px; }
+.status-badge {
+  background: var(--green);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
 
-/* HERO SECTION */
-.hero-intro{background:linear-gradient(135deg,#0d1f3c,#0f2a4a);border:1px solid rgba(245,166,35,0.3);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center}
-.hero-intro h1{font-size:1.4rem;font-weight:800;color:#f5a623;margin-bottom:4px}
-.hero-intro p{font-size:0.85rem;color:#9aa8bc;line-height:1.5}
-.hero-profile{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
-.profile-badge{padding:4px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;background:rgba(0,180,216,0.15);color:#00b4d8;border:1px solid rgba(0,180,216,0.3)}
+/* ===== ALERT BANNER ===== */
+.alert-banner {
+  background: linear-gradient(135deg, #4d0000, #7a0000);
+  border: 1px solid #ff4d4d;
+  border-radius: 10px;
+  margin: 12px 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.alert-icon { font-size: 1.4rem; flex-shrink: 0; }
+.alert-text h3 { font-size: 0.9rem; font-weight: 800; color: #ff6b6b; margin-bottom: 3px; }
+.alert-text p { font-size: 0.78rem; color: #ffaaaa; line-height: 1.4; }
+.alert-text a { color: #ff9999; font-weight: 700; }
 
-.countdown-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:20px}
-@media(min-width:600px){.countdown-grid{grid-template-columns:repeat(3,1fr)}}
+/* ===== STATS BAR ===== */
+.stats-bar {
+  display: flex;
+  gap: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+  margin: 0 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.stats-bar::-webkit-scrollbar { display: none; }
+.stat {
+  flex: 1;
+  min-width: 80px;
+  padding: 10px 8px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.stat:last-child { border-right: none; }
+.stat-num { font-size: 1.3rem; font-weight: 800; color: var(--gold); display: block; }
+.stat-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; display: block; }
 
-.countdown-card{border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden;border:1px solid}
-.countdown-card.priority-1{background:linear-gradient(135deg,#1a0a00,#2a1400);border-color:#f5a623}
-.countdown-card.priority-2{background:linear-gradient(135deg,#001a2a,#00253d);border-color:#00b4d8}
-.countdown-card.priority-3{background:linear-gradient(135deg,#001a10,#002a18);border-color:#2ecc71}
-.countdown-card .rank-badge{position:absolute;top:10px;right:10px;font-size:0.65rem;font-weight:800;padding:3px 8px;border-radius:10px;background:rgba(0,0,0,0.4)}
-.countdown-card.priority-1 .rank-badge{color:#f5a623}
-.countdown-card.priority-2 .rank-badge{color:#00b4d8}
-.countdown-card.priority-3 .rank-badge{color:#2ecc71}
-.countdown-name{font-size:1rem;font-weight:800;color:#fff;margin-bottom:4px}
-.countdown-award{font-size:0.8rem;margin-bottom:14px}
-.countdown-card.priority-1 .countdown-award{color:#f5a623}
-.countdown-card.priority-2 .countdown-award{color:#00b4d8}
-.countdown-card.priority-3 .countdown-award{color:#2ecc71}
-.countdown-timer{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
-.timer-unit{text-align:center}
-.timer-num{font-size:1.8rem;font-weight:900;line-height:1;display:block}
-.countdown-card.priority-1 .timer-num{color:#f5a623}
-.countdown-card.priority-2 .timer-num{color:#00b4d8}
-.countdown-card.priority-3 .timer-num{color:#2ecc71}
-.timer-label{font-size:0.55rem;text-transform:uppercase;color:#7a8ca8;letter-spacing:0.5px}
-.timer-sep{font-size:1.5rem;font-weight:900;color:#3a4a5c;padding-top:4px}
-.countdown-deadline{font-size:0.7rem;color:#7a8ca8;margin-bottom:12px}
-.start-btn{display:block;width:100%;padding:10px;border:none;border-radius:10px;font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;transition:all 0.2s}
-.countdown-card.priority-1 .start-btn{background:#f5a623;color:#0a1628}
-.countdown-card.priority-2 .start-btn{background:#00b4d8;color:#0a1628}
-.countdown-card.priority-3 .start-btn{background:#2ecc71;color:#0a1628}
-.start-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+/* ===== SECTION ===== */
+.section-wrap { padding: 0 16px 100px; }
+.section-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin: 0 0 10px;
+  padding-left: 2px;
+}
 
-.quick-actions{background:#0d1f3c;border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.06)}
-.quick-actions h3{font-size:0.9rem;font-weight:700;color:#f5a623;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
-.action-list{list-style:none;display:flex;flex-direction:column;gap:8px}
-.action-item{display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.05)}
-.action-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
-.action-text{flex:1}
-.action-title{font-size:0.85rem;font-weight:700;color:#e8eaf0;margin-bottom:2px}
-.action-desc{font-size:0.75rem;color:#7a8ca8}
-.action-urgent{font-size:0.65rem;font-weight:700;color:#f5a623;background:rgba(245,166,35,0.1);padding:2px 8px;border-radius:8px;flex-shrink:0;align-self:center}
+/* ===== OPPORTUNITY CARD ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  border-radius: 14px 0 0 14px;
+}
+.card.urgent::before { background: var(--red); }
+.card.hot::before { background: var(--orange); }
+.card.rolling::before { background: var(--blue); }
+.card.auto::before { background: var(--green); }
 
-/* PIPELINE SECTION */
-.pipeline-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:700px){.pipeline-grid{grid-template-columns:repeat(4,1fr)}}
-.pipeline-col{border-radius:12px;padding:12px;background:#0d1f3c;border:1px solid rgba(255,255,255,0.06)}
-.pipeline-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.pipeline-col-title{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px}
-.col-not-started .pipeline-col-title{color:#7a8ca8}
-.col-in-progress .pipeline-col-title{color:#f5a623}
-.col-essay-ready .pipeline-col-title{color:#00b4d8}
-.col-submitted .pipeline-col-title{color:#2ecc71}
-.col-count{font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:10px}
-.col-not-started .col-count{background:rgba(122,140,168,0.2);color:#7a8ca8}
-.col-in-progress .col-count{background:rgba(245,166,35,0.2);color:#f5a623}
-.col-essay-ready .col-count{background:rgba(0,180,216,0.2);color:#00b4d8}
-.col-submitted .col-count{background:rgba(46,204,113,0.2);color:#2ecc71}
-.pipeline-cards{display:flex;flex-direction:column;gap:8px;min-height:60px}
-.pipeline-card{background:#0a1628;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:transform 0.15s}
-.pipeline-card:hover{transform:translateY(-1px);border-color:rgba(245,166,35,0.3)}
-.pipe-card-name{font-size:0.75rem;font-weight:700;color:#e8eaf0;margin-bottom:4px;line-height:1.3}
-.pipe-card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.pipe-score{font-size:0.65rem;font-weight:800;padding:2px 6px;border-radius:6px}
-.score-tier-a{background:rgba(245,166,35,0.2);color:#f5a623}
-.score-tier-b{background:rgba(0,180,216,0.2);color:#00b4d8}
-.score-tier-c{background:rgba(46,204,113,0.2);color:#2ecc71}
-.pipe-deadline{font-size:0.65rem;color:#7a8ca8}
-.pipe-award{font-size:0.7rem;color:#9aa8bc;margin-bottom:6px}
-.pipe-apply-btn{display:block;width:100%;padding:5px;border:1px solid rgba(245,166,35,0.4);background:transparent;color:#f5a623;border-radius:6px;font-size:0.7rem;font-weight:700;transition:all 0.2s}
-.pipe-apply-btn:hover{background:rgba(245,166,35,0.15)}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.card-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  flex: 1;
+}
+.card-amount {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--gold);
+  white-space: nowrap;
+  background: var(--gold-dim);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
 
-/* OPPORTUNITIES SECTION */
-.opp-controls{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.filter-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
-.filter-row::-webkit-scrollbar{display:none}
-.filter-btn{flex-shrink:0;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:16px;background:transparent;color:#9aa8bc;font-size:0.75rem;font-weight:600;transition:all 0.2s}
-.filter-btn.active{background:#f5a623;color:#0a1628;border-color:#f5a623}
-.filter-btn:hover:not(.active){border-color:#f5a623;color:#f5a623}
-.search-sort-row{display:flex;gap:8px}
-.search-box{flex:1;padding:8px 12px;background:#0d1f3c;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e8eaf0;font-size:0.85rem;outline:none}
-.search-box:focus{border-color:#f5a623}
-.search-box::placeholder{color:#4a5c70}
-.sort-select{padding:8px 12px;background:#0d1f3c;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e8eaf0;font-size:0.8rem;outline:none;min-width:130px}
-.sort-select:focus{border-color:#f5a623}
-.opp-count{font-size:0.75rem;color:#7a8ca8;margin-bottom:10px}
-.opp-grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:500px){.opp-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.opp-grid{grid-template-columns:repeat(3,1fr)}}
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.tag-deadline-urgent { background: rgba(255,77,77,0.15); color: #ff6b6b; border: 1px solid rgba(255,77,77,0.3); }
+.tag-deadline-hot { background: rgba(255,140,0,0.15); color: #ffad33; border: 1px solid rgba(255,140,0,0.3); }
+.tag-deadline-rolling { background: rgba(0,180,216,0.15); color: var(--blue); border: 1px solid rgba(0,180,216,0.3); }
+.tag-deadline-auto { background: rgba(0,201,110,0.15); color: var(--green); border: 1px solid rgba(0,201,110,0.3); }
+.tag-category { background: rgba(255,255,255,0.06); color: var(--text-dim); border: 1px solid rgba(255,255,255,0.1); }
 
-.opp-card{background:#0d1f3c;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.06);transition:transform 0.15s,border-color 0.15s;position:relative}
-.opp-card:hover{transform:translateY(-2px);border-color:rgba(245,166,35,0.2)}
-.opp-card.applied{border-color:rgba(46,204,113,0.4);background:#0a2018}
-.opp-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
-.opp-name{font-size:0.85rem;font-weight:700;color:#e8eaf0;line-height:1.4;flex:1}
-.opp-score-badge{flex-shrink:0;font-size:0.7rem;font-weight:800;padding:3px 8px;border-radius:8px}
-.opp-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.opp-type-badge{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:8px}
-.badge-scholarship{background:rgba(245,166,35,0.15);color:#f5a623}
-.badge-federal{background:rgba(0,180,216,0.15);color:#00b4d8}
-.badge-state{background:rgba(46,204,113,0.15);color:#2ecc71}
-.badge-military{background:rgba(231,76,60,0.15);color:#e74c3c}
-.badge-corporate{background:rgba(155,89,182,0.15);color:#a569bd}
-.badge-institutional{background:rgba(52,152,219,0.15);color:#5dade2}
-.badge-fellowship{background:rgba(243,156,18,0.15);color:#f39c12}
-.opp-award{font-size:0.85rem;font-weight:800;color:#2ecc71;margin-bottom:4px}
-.opp-deadline{font-size:0.75rem;color:#7a8ca8;margin-bottom:10px}
-.opp-deadline span{color:#e8eaf0;font-weight:600}
-.opp-actions{display:flex;gap:6px}
-.opp-apply-btn{flex:1;padding:7px;border:none;border-radius:8px;background:#f5a623;color:#0a1628;font-size:0.75rem;font-weight:800;text-align:center;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;gap:4px}
-.opp-apply-btn:hover{opacity:0.9}
-.opp-mark-btn{padding:7px 10px;border:1px solid rgba(46,204,113,0.4);background:transparent;color:#2ecc71;border-radius:8px;font-size:0.7rem;font-weight:700;transition:all 0.2s;white-space:nowrap}
-.opp-mark-btn:hover{background:rgba(46,204,113,0.15)}
-.opp-mark-btn.marked{background:rgba(46,204,113,0.2);color:#2ecc71}
-.applied-overlay{position:absolute;top:8px;left:8px;background:#2ecc71;color:#0a1628;font-size:0.65rem;font-weight:800;padding:2px 8px;border-radius:8px}
+.card-notes {
+  font-size: 0.78rem;
+  color: #9aa8bc;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.card-notes strong { color: var(--text); }
 
-/* ESSAYS SECTION */
-.essay-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:700px){.essay-grid{grid-template-columns:repeat(2,1fr)}}
+.card-btn {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.card-btn:hover { opacity: 0.85; text-decoration: none; }
+.btn-urgent { background: var(--red); color: #fff; }
+.btn-hot { background: var(--orange); color: #fff; }
+.btn-rolling { background: var(--blue); color: #fff; }
+.btn-auto { background: var(--green); color: #000; }
 
-.essay-card{background:#0d1f3c;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.06)}
-.essay-card.ready{border-color:rgba(46,204,113,0.3)}
-.essay-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.essay-status-icon{font-size:1.4rem}
-.essay-card-title{flex:1}
-.essay-card-name{font-size:1rem;font-weight:800;color:#e8eaf0}
-.essay-card-meta{font-size:0.75rem;color:#7a8ca8}
-.essay-status-pill{font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:10px;flex-shrink:0}
-.pill-ready{background:rgba(46,204,113,0.2);color:#2ecc71}
-.pill-strategy{background:rgba(0,180,216,0.15);color:#00b4d8}
-.essay-details{font-size:0.8rem;color:#9aa8bc;line-height:1.6;margin-bottom:10px}
-.essay-details strong{color:#e8eaf0}
-.essay-strategy{background:#0a1628;border-radius:8px;padding:12px;border-left:3px solid #00b4d8;margin-bottom:10px}
-.essay-strategy-title{font-size:0.7rem;font-weight:800;color:#00b4d8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
-.essay-strategy ul{list-style:none;display:flex;flex-direction:column;gap:4px}
-.essay-strategy li{font-size:0.78rem;color:#9aa8bc;padding-left:12px;position:relative;line-height:1.5}
-.essay-strategy li::before{content:'>';position:absolute;left:0;color:#00b4d8;font-weight:700}
-.essay-expand-btn{width:100%;padding:8px;border:1px solid rgba(46,204,113,0.4);background:transparent;color:#2ecc71;border-radius:8px;font-size:0.8rem;font-weight:700;transition:all 0.2s}
-.essay-expand-btn:hover{background:rgba(46,204,113,0.1)}
-.essay-full-text{display:none;margin-top:12px;background:#0a1628;border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.06);max-height:400px;overflow-y:auto}
-.essay-full-text.open{display:block}
-.essay-full-text p{font-size:0.8rem;line-height:1.7;color:#c0cce0;margin-bottom:10px}
-.essay-full-text p:last-child{margin-bottom:0}
-.essay-checklist{margin-top:10px}
-.essay-checklist-title{font-size:0.7rem;font-weight:800;color:#f5a623;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
-.checklist-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.checklist-item:last-child{border-bottom:none}
-.checklist-item span{font-size:0.78rem;color:#9aa8bc}
+/* ===== RANK BADGE ===== */
+.rank-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-dim);
+}
 
-/* EMAILS SECTION */
-.email-grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:600px){.email-grid{grid-template-columns:repeat(2,1fr)}}
+/* ===== COUNTDOWN ===== */
+.countdown-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 8px;
+}
+.countdown-chip.red { background: rgba(255,77,77,0.2); color: #ff6b6b; }
+.countdown-chip.orange { background: rgba(255,140,0,0.2); color: #ffad33; }
 
-.email-card{background:#0d1f3c;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.06);transition:border-color 0.2s}
-.email-card.sent-card{border-color:rgba(46,204,113,0.3);background:#0a2018}
-.email-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.email-icon{font-size:1.5rem}
-.email-card-title{flex:1}
-.email-card-name{font-size:0.9rem;font-weight:800;color:#e8eaf0}
-.email-card-to{font-size:0.72rem;color:#7a8ca8}
-.sent-pill{font-size:0.65rem;font-weight:800;padding:3px 8px;border-radius:8px;background:rgba(46,204,113,0.2);color:#2ecc71}
-.email-subject{font-size:0.75rem;color:#9aa8bc;margin-bottom:8px;font-style:italic}
-.email-preview{font-size:0.75rem;color:#7a8ca8;line-height:1.5;margin-bottom:12px}
-.email-actions{display:flex;gap:8px}
-.email-send-btn{flex:1;padding:9px;border:none;border-radius:8px;background:#00b4d8;color:#0a1628;font-size:0.8rem;font-weight:800;transition:opacity 0.2s;text-align:center}
-.email-send-btn:hover{opacity:0.9}
-.email-sent-btn{padding:9px 12px;border:1px solid rgba(46,204,113,0.4);background:transparent;color:#2ecc71;border-radius:8px;font-size:0.75rem;font-weight:700;white-space:nowrap;transition:all 0.2s}
-.email-sent-btn:hover{background:rgba(46,204,113,0.1)}
-.email-sent-btn.marked{background:rgba(46,204,113,0.2)}
-.email-note{font-size:0.7rem;color:#f5a623;margin-top:8px;padding:6px 10px;background:rgba(245,166,35,0.08);border-radius:6px;border-left:2px solid #f5a623}
+/* ===== PROFILE STRIP ===== */
+.profile-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 0 16px 14px;
+  border: 1px solid var(--gold-border);
+}
+.profile-strip img {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.profile-info h3 { font-size: 0.95rem; font-weight: 800; color: var(--gold); }
+.profile-info p { font-size: 0.7rem; color: var(--text-dim); line-height: 1.5; margin-top: 2px; }
+.profile-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.pbadge {
+  font-size: 0.62rem; font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: rgba(0,180,216,0.12);
+  color: var(--blue);
+  border: 1px solid rgba(0,180,216,0.2);
+}
 
-/* SCHOOLS SECTION */
-.school-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:600px){.school-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.school-grid{grid-template-columns:repeat(3,1fr)}}
-
-.school-card{background:#0d1f3c;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.06)}
-.school-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.school-name{font-size:1rem;font-weight:800;color:#e8eaf0;margin-bottom:2px}
-.school-program{font-size:0.75rem;color:#7a8ca8}
-.school-status-pill{font-size:0.65rem;font-weight:800;padding:4px 10px;border-radius:10px;background:rgba(46,204,113,0.2);color:#2ecc71;flex-shrink:0;white-space:nowrap}
-.school-details{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.school-detail-row{display:flex;align-items:flex-start;gap:8px}
-.school-detail-label{font-size:0.7rem;color:#7a8ca8;font-weight:600;min-width:70px;flex-shrink:0;padding-top:1px}
-.school-detail-val{font-size:0.78rem;color:#e8eaf0;line-height:1.4;word-break:break-all}
-.school-actions{display:flex;flex-direction:column;gap:6px}
-.school-aid-btn{padding:8px;border:none;border-radius:8px;background:linear-gradient(135deg,#f5a623,#e09520);color:#0a1628;font-size:0.78rem;font-weight:800;text-align:center;transition:opacity 0.2s;display:block}
-.school-aid-btn:hover{opacity:0.9;text-decoration:none}
-.school-email-btn{padding:8px;border:1px solid rgba(0,180,216,0.4);background:transparent;color:#00b4d8;border-radius:8px;font-size:0.75rem;font-weight:700;text-align:center;transition:all 0.2s;display:block}
-.school-email-btn:hover{background:rgba(0,180,216,0.1);text-decoration:none}
-.merit-info{font-size:0.72rem;color:#9aa8bc;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:6px;border-left:2px solid #f5a623;margin-bottom:6px}
-
-/* UTILITY */
-.empty-state{text-align:center;padding:40px 20px;color:#4a5c70;font-size:0.9rem}
-.section-divider{height:1px;background:rgba(255,255,255,0.05);margin:20px 0}
-.scrollable-section{overflow-x:auto}
-
-/* MONEY RANKED */
-.money-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#0d1f3c;border-radius:10px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.06);transition:border-color 0.15s}
-.money-row:hover{border-color:rgba(245,166,35,0.2)}
-.money-rank{flex-shrink:0;font-size:0.75rem;font-weight:900;color:#f5a623;background:rgba(245,166,35,0.1);border-radius:6px;padding:4px 7px;min-width:28px;text-align:center;align-self:center}
-.money-main{flex:1;min-width:0}
-.money-name{font-size:0.85rem;font-weight:700;color:#e8eaf0;margin-bottom:4px;line-height:1.4}
-.money-name a{color:#e8eaf0;text-decoration:none}
-.money-name a:hover{color:#f5a623;text-decoration:underline}
-.money-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.money-deadline{font-size:0.7rem;color:#7a8ca8}
-.money-note{font-size:0.7rem;color:#5a6c80;font-style:italic}
-.money-right{flex-shrink:0;text-align:right;min-width:110px}
-.money-amount{font-size:0.95rem;font-weight:900;margin-bottom:3px}
-.money-action{font-size:0.65rem;font-weight:700}
-.money-week-banner{background:linear-gradient(135deg,rgba(231,76,60,0.15),rgba(231,76,60,0.05));border:1px solid rgba(231,76,60,0.3);border-radius:12px;padding:14px 16px;margin-bottom:20px}
-.money-week-banner h3{font-size:0.9rem;font-weight:800;color:#e74c3c;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
-.money-week-banner p{font-size:0.8rem;color:#9aa8bc}
+/* ===== FOOTER ===== */
+.footer-note {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  padding: 20px 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 8px;
+}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="header-top">
-    <div class="logo">🚀 <span>King Neptune</span></div>
-    <div class="tagline">Emilio's College Cash HQ</div>
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <img src="dashboard/emilio.png" alt="Emilio" class="header-logo" onerror="this.style.display='none'">
+    <div class="header-text">
+      <h1>🔱 King Neptune</h1>
+      <p>Emilio's Grant Dashboard</p>
+    </div>
   </div>
-  <nav class="tab-nav">
-    <button class="tab-btn active" id="tab-hero">🔥 Urgent</button>
-    <button class="tab-btn" id="tab-pipeline">📊 Pipeline</button>
-    <button class="tab-btn" id="tab-opportunities">💰 Opportunities</button>
-    <button class="tab-btn" id="tab-essays">✍️ Essays</button>
-    <button class="tab-btn" id="tab-emails">📧 Emails</button>
-    <button class="tab-btn" id="tab-schools">🏫 Schools</button>
-    <button class="tab-btn" id="tab-money">💵 Money Ranked</button>
-    <button class="tab-btn" id="tab-master">🎯 Master (110)</button>
-  </nav>
+  <div class="status-badge">7 OPEN</div>
 </header>
 
-<div class="stats-bar" id="stats-bar"></div>
+<!-- 🚨 SHPE ALERT -->
+<div class="alert-banner">
+  <div class="alert-icon">🚨</div>
+  <div class="alert-text">
+    <h3>APPLY TODAY — SHPE Closes April 30</h3>
+    <p><strong>3 days left</strong> for SHPE scholarship ($1K–$10K). Latino + Aerospace Engineering = perfect match.<br>
+    <a href="https://shpe.org/engage/programs/scholarshpe/" target="_blank">→ Apply at shpe.org now</a></p>
+  </div>
+</div>
 
-<main>
-
-<!-- ===== SECTION 1: HERO ===== -->
-<section id="section-hero" class="section active">
-  <div class="hero-intro">
-    <h1>Emilio Neptune's Scholarship Command Center</h1>
-    <p>Latino + Black | Military Family | A.S. at 18 | 3.52 GPA | Aerospace Engineering → NASA</p>
-    <div class="hero-profile">
-      <span class="profile-badge">Pell-Eligible</span>
-      <span class="profile-badge">PTK Honor Society</span>
-      <span class="profile-badge">Dean's List</span>
-      <span class="profile-badge">60+ Credits</span>
-      <span class="profile-badge">5 Acceptances</span>
-      <span class="profile-badge">Military Family (Ch.35)</span>
+<!-- PROFILE STRIP -->
+<div class="profile-strip">
+  <img src="dashboard/emilio.png" alt="Emilio" onerror="this.style.display='none'">
+  <div class="profile-info">
+    <h3>Emilio — Aerospace Engineering</h3>
+    <p>3.52 GPA · 60+ credits · A.S. at 18 · Phi Theta Kappa · Dean's List</p>
+    <div class="profile-badges">
+      <span class="pbadge">Latino + Black</span>
+      <span class="pbadge">Military Family</span>
+      <span class="pbadge">Pell-Eligible</span>
+      <span class="pbadge">NC Resident</span>
+      <span class="pbadge">Goal: NASA</span>
     </div>
   </div>
+</div>
 
-  <div class="section-title">⚡ Top 3 Deadlines — Act Now</div>
-  <p class="section-sub">These cannot wait. Start today.</p>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">7</span>
+    <span class="stat-label">Open Now</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">$57K+</span>
+    <span class="stat-label">Available</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">3</span>
+    <span class="stat-label">This Month</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">Apr 30</span>
+    <span class="stat-label">Next Deadline</span>
+  </div>
+</div>
 
-  <div class="countdown-grid">
+<!-- OPPORTUNITIES -->
+<div class="section-wrap">
 
-    <div class="countdown-card priority-1">
-      <span class="rank-badge">#3 Score: 91</span>
-      <div class="countdown-name">Gates Scholarship</div>
-      <div class="countdown-award">Full Cost of Attendance — Renewable</div>
-      <div class="countdown-timer" id="timer-gates"></div>
-      <div class="countdown-deadline">Deadline: September 2026 | Opens: August 2026</div>
-      <a href="https://www.thegatesscholarship.org/" target="_blank" class="start-btn">Start This Now →</a>
+  <!-- URGENT THIS WEEK -->
+  <div class="section-title">🔴 Apply This Week</div>
+
+  <!-- #1 SHPE -->
+  <div class="card urgent">
+    <div class="rank-badge">#1</div>
+    <div class="card-top">
+      <div class="card-name">SHPE Foundation Scholarship</div>
+      <div class="card-amount">$1K–$10K</div>
     </div>
-
-    <div class="countdown-card priority-2">
-      <span class="rank-badge">#1 Score: 95</span>
-      <div class="countdown-name">Jack Kent Cooke Transfer</div>
-      <div class="countdown-award">Up to $55,000/year — Renewable</div>
-      <div class="countdown-timer" id="timer-jkc"></div>
-      <div class="countdown-deadline">Deadline: November 2026 | Opens: October 2026</div>
-      <a href="https://www.jkcf.org/our-scholarships/" target="_blank" class="start-btn">Start This Now →</a>
+    <div class="card-meta">
+      <span class="tag tag-deadline-urgent">🚨 Closes April 30</span>
+      <span class="countdown-chip red" id="shpe-cd">3 days left</span>
+      <span class="tag tag-category">Hispanic STEM Foundation</span>
     </div>
-
-    <div class="countdown-card priority-3">
-      <span class="rank-badge">#9 Score: 85</span>
-      <div class="countdown-name">Ron Brown Scholar Program</div>
-      <div class="countdown-award">$10,000/year — Renewable</div>
-      <div class="countdown-timer" id="timer-ronbrown"></div>
-      <div class="countdown-deadline">Deadline: January 2027 | Opens: August 2026</div>
-      <a href="https://www.ronbrown.org/" target="_blank" class="start-btn">Start This Now →</a>
+    <div class="card-notes">
+      <strong>Latino + Aerospace Engineering = perfect match.</strong> SHPE membership required (~$35/yr student rate). One Common App covers multiple SHPE scholarships. Apply at ScholarSHPE portal — do it today.
     </div>
-
+    <a href="https://shpe.org/engage/programs/scholarshpe/" target="_blank" class="card-btn btn-urgent">🚨 Apply NOW at shpe.org</a>
   </div>
 
-  <div class="quick-actions">
-    <h3>🎯 This Week's Action List</h3>
-    <ul class="action-list">
-      <li class="action-item">
-        <span class="action-icon">✅</span>
-        <div class="action-text">
-          <div class="action-title">Gates Essay is READY</div>
-          <div class="action-desc">Full 650-word essay drafted. Review the Gates tab, confirm word count matches portal, then apply when portal opens August 2026.</div>
-        </div>
-        <span class="action-urgent">Essay Ready</span>
-      </li>
-      <li class="action-item">
-        <span class="action-icon">📧</span>
-        <div class="action-text">
-          <div class="action-title">Send Financial Aid Emails to All 5 Schools</div>
-          <div class="action-desc">CU Boulder, Maryland, Virginia Tech, Iowa State, Ohio State — request merit aid review NOW before enrollment deadline.</div>
-        </div>
-        <span class="action-urgent">Do This Week</span>
-      </li>
-      <li class="action-item">
-        <span class="action-icon">🎓</span>
-        <div class="action-text">
-          <div class="action-title">Join NSBE + SHPE at Your Transfer School</div>
-          <div class="action-desc">Multiple scholarships require membership. Join as soon as you enroll Fall 2026. Worth thousands in exclusive scholarships.</div>
-        </div>
-        <span class="action-urgent">Fall 2026</span>
-      </li>
-      <li class="action-item">
-        <span class="action-icon">✍️</span>
-        <div class="action-text">
-          <div class="action-title">Request 2 Recommendation Letters Now</div>
-          <div class="action-desc">Gates, JKC, and Ron Brown all require strong faculty letters. Give professors time to write thoughtfully — do not wait until August.</div>
-        </div>
-        <span class="action-urgent">This Month</span>
-      </li>
-      <li class="action-item">
-        <span class="action-icon">🔎</span>
-        <div class="action-text">
-          <div class="action-title">Verify Gates + Ron Brown Transfer Eligibility</div>
-          <div class="action-desc">Both scholarships typically target HS seniors. Contact Gates: admissions@thegatesscholarship.org | Ron Brown: info@ronbrown.org</div>
-        </div>
-        <span class="action-urgent">ASAP</span>
-      </li>
-      <li class="action-item">
-        <span class="action-icon">💰</span>
-        <div class="action-text">
-          <div class="action-title">Apply for HSF Scholarship (Opens August 2026)</div>
-          <div class="action-desc">Hispanic Scholarship Fund — $500-$5,000. Textbook fit: Latino + STEM + Pell-eligible. Deadline February 2027. Get FAFSA ready.</div>
-        </div>
-        <span class="action-urgent">Aug 2026</span>
-      </li>
-    </ul>
-  </div>
-</section>
+  <!-- URGENT THIS MONTH -->
+  <div class="section-title" style="margin-top:20px">🔴 Apply This Month</div>
 
-<!-- ===== SECTION 2: PIPELINE ===== -->
-<section id="section-pipeline" class="section">
-  <div class="section-title">📊 Application Pipeline</div>
-  <p class="section-sub">Top 15 opportunities by score — track your progress</p>
-
-  <div class="pipeline-grid">
-
-    <div class="pipeline-col col-not-started">
-      <div class="pipeline-col-header">
-        <span class="pipeline-col-title">Not Started</span>
-        <span class="col-count" id="pipe-count-0">0</span>
-      </div>
-      <div class="pipeline-cards" id="pipe-col-not-started"></div>
+  <!-- #2 DOE SULI -->
+  <div class="card hot">
+    <div class="rank-badge">#2</div>
+    <div class="card-top">
+      <div class="card-name">DOE SULI — Fall 2026</div>
+      <div class="card-amount">~$6,800</div>
     </div>
-
-    <div class="pipeline-col col-in-progress">
-      <div class="pipeline-col-header">
-        <span class="pipeline-col-title">In Progress</span>
-        <span class="col-count" id="pipe-count-1">0</span>
-      </div>
-      <div class="pipeline-cards" id="pipe-col-in-progress"></div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-hot">⚠️ May 20, 2026 · 5pm ET</span>
+      <span class="countdown-chip orange" id="suli-cd">23 days</span>
+      <span class="tag tag-category">DOE Federal Stipend</span>
     </div>
-
-    <div class="pipeline-col col-essay-ready">
-      <div class="pipeline-col-header">
-        <span class="pipeline-col-title">Essay Ready</span>
-        <span class="col-count" id="pipe-count-2">0</span>
-      </div>
-      <div class="pipeline-cards" id="pipe-col-essay-ready"></div>
+    <div class="card-notes">
+      <strong>$680/week × 10 weeks</strong> at one of 17 national DOE labs. STEM engineering eligible. Fall term Aug–Dec. ⚠️ <strong>Deadline is May 20 — not June as previously listed. Apply sooner!</strong>
     </div>
-
-    <div class="pipeline-col col-submitted">
-      <div class="pipeline-col-header">
-        <span class="pipeline-col-title">Submitted</span>
-        <span class="col-count" id="pipe-count-3">0</span>
-      </div>
-      <div class="pipeline-cards" id="pipe-col-submitted">
-        <div class="empty-state" style="padding:20px 10px;font-size:0.8rem">Nothing submitted yet.<br>Keep pushing!</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== SECTION 3: OPPORTUNITIES ===== -->
-<section id="section-opportunities" class="section">
-  <div class="section-title">💰 All Opportunities</div>
-  <p class="section-sub">96 curated opportunities + 134 in research database — filter, search, and track your applications</p>
-
-  <div class="opp-controls">
-    <div class="filter-row">
-      <button class="filter-btn active" id="filter-all">All (100)</button>
-      <button class="filter-btn" id="filter-scholarship">Scholarship</button>
-      <button class="filter-btn" id="filter-federal">Federal</button>
-      <button class="filter-btn" id="filter-military">Military</button>
-      <button class="filter-btn" id="filter-corporate">Corporate</button>
-      <button class="filter-btn" id="filter-state">State</button>
-    </div>
-    <div class="search-sort-row">
-      <input type="text" class="search-box" id="opp-search" placeholder="Search opportunities...">
-      <select class="sort-select" id="opp-sort">
-        <option value="score">Sort: Score</option>
-        <option value="deadline">Sort: Deadline</option>
-        <option value="award">Sort: Award Amount</option>
-      </select>
-    </div>
-    <div class="opp-count" id="opp-count">Showing 100 opportunities</div>
+    <a href="https://science.osti.gov/wdts/suli" target="_blank" class="card-btn btn-hot">Apply at science.osti.gov →</a>
   </div>
 
-  <div class="opp-grid" id="opp-grid"></div>
-</section>
-
-<!-- ===== SECTION 4: ESSAYS ===== -->
-<section id="section-essays" class="section">
-  <div class="section-title">✍️ Essay Status</div>
-  <p class="section-sub">Track your essay readiness — one essay unlocks multiple applications</p>
-
-  <div class="essay-grid" id="essay-grid"></div>
-</section>
-
-<!-- ===== SECTION 5: EMAILS ===== -->
-<section id="section-emails" class="section">
-  <div class="section-title">📧 Emails to Send</div>
-  <p class="section-sub">7 action items — send these to maximize your funding</p>
-
-  <div class="email-grid" id="email-grid"></div>
-</section>
-
-<!-- ===== SECTION 6: SCHOOLS ===== -->
-<section id="section-schools" class="section">
-  <div class="section-title">🏫 School Comparison</div>
-  <p class="section-sub">5 acceptances — maximize your aid package at each</p>
-
-  <div class="school-grid" id="school-grid"></div>
-</section>
-
-<!-- ===== SECTION 7: MONEY RANKED ===== -->
-<section id="section-money" class="section">
-  <div class="section-title">💵 Money-First Ranking</div>
-  <p class="section-sub">All scholarships with Fall 2026 fund availability — ranked highest dollar first. Updated April 27, 2026.</p>
-
-  <div id="money-count-banner" style="background:linear-gradient(135deg,rgba(0,180,216,0.15),rgba(0,180,216,0.05));border:1px solid rgba(0,180,216,0.4);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <div style="font-size:1.1rem;font-weight:800;color:#00b4d8">🎓 <span id="money-total-count">86</span> Fall 2026 Scholarships</div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap">
-      <span style="font-size:0.8rem;color:#e74c3c;font-weight:700">🔴 <span id="money-apply-count">24</span> Apply This Week</span>
-      <span style="font-size:0.8rem;color:#f5a623;font-weight:700">🟡 <span id="money-opens-count">12</span> Opens Soon</span>
+  <!-- #3 NASA OSTEM -->
+  <div class="card hot">
+    <div class="rank-badge">#3</div>
+    <div class="card-top">
+      <div class="card-name">NASA OSTEM Internship — Fall 2026</div>
+      <div class="card-amount">$7.5K–$18K</div>
     </div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-hot">⚠️ May 22, 2026</span>
+      <span class="countdown-chip orange" id="nasa-cd">25 days</span>
+      <span class="tag tag-category">NASA Federal Stipend</span>
+    </div>
+    <div class="card-notes">
+      <strong>~$25–$30/hr stipend</strong> for 15-week fall term. US citizen; GPA 3.0+. Aerospace engineering is prime fit. Work side-by-side with NASA scientists. Apply at stemgateway.nasa.gov.
+    </div>
+    <a href="https://stemgateway.nasa.gov/s/" target="_blank" class="card-btn btn-hot">Apply at stemgateway.nasa.gov →</a>
   </div>
 
-  <div class="money-week-banner">
-    <h3>🔴 Apply This Week (24 scholarships open right now)</h3>
-    <p>Deadline rolling or April 30, 2026 — College Board, Scholarships360 $10K No Essay, UNCF, Virginia Tech, Ohio State, Iowa State, CU Boulder, NC CC Transfer Grant, and more are open now.</p>
+  <!-- ROLLING -->
+  <div class="section-title" style="margin-top:20px">🔵 Rolling — Apply Anytime</div>
+
+  <!-- #4 NASA Pathways -->
+  <div class="card rolling">
+    <div class="rank-badge">#4</div>
+    <div class="card-top">
+      <div class="card-name">NASA Pathways Internship</div>
+      <div class="card-amount">$20–$26/hr</div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-rolling">🔵 Rolling / Open Now</span>
+      <span class="tag tag-category">NASA Civil Service Pipeline</span>
+    </div>
+    <div class="card-notes">
+      <strong>Leads to permanent NASA employment after graduation.</strong> GS-4 to GS-5 pay scale. 15+ credit hours; 2.9+ GPA. Search "Student Trainee Aerospace Engineering" on USAJobs. Available at Johnson, Kennedy, Langley, Marshall.
+    </div>
+    <a href="https://www.usajobs.gov/search/results/?k=student+trainee+aerospace+engineering" target="_blank" class="card-btn btn-rolling">Search on USAJobs.gov →</a>
   </div>
 
-  <div class="stats-bar" id="money-stats" style="margin-bottom:16px;border-radius:10px;"></div>
+  <!-- #5 UNCF -->
+  <div class="card rolling">
+    <div class="rank-badge">#5</div>
+    <div class="card-top">
+      <div class="card-name">UNCF Scholarship Portal</div>
+      <div class="card-amount">$500–$10K+</div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-rolling">🔵 Multiple Rolling Deadlines</span>
+      <span class="tag tag-category">Foundation — Black Students</span>
+    </div>
+    <div class="card-notes">
+      <strong>400+ scholarship programs.</strong> Create one profile, apply to all matching opportunities. Key open programs: Fund II Foundation STEM Scholars, Frederick Douglass Bicentennial Scholarship. Black + STEM + military family = strong candidate.
+    </div>
+    <a href="https://opportunities.uncf.org/s/pre-login-welcome-page" target="_blank" class="card-btn btn-rolling">Create Profile at UNCF →</a>
+  </div>
 
-  <div id="money-table-body"></div>
-</section>
+  <!-- AUTOMATIC -->
+  <div class="section-title" style="margin-top:20px">🟢 Automatic — Just File FAFSA</div>
 
-</main>
+  <!-- #6 Federal Pell -->
+  <div class="card auto">
+    <div class="rank-badge">#6</div>
+    <div class="card-top">
+      <div class="card-name">Federal Pell Grant</div>
+      <div class="card-amount">Up to $7,395/yr</div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-auto">🟢 Automatic via FAFSA</span>
+      <span class="tag tag-category">Federal Need-Based</span>
+    </div>
+    <div class="card-notes">
+      <strong>No separate application needed.</strong> Emilio qualifies as Pell-eligible. Automatically awarded with FAFSA. Disbursed by the school each semester. Free money — just make sure FAFSA is filed and current.
+    </div>
+    <a href="https://studentaid.gov/understand-aid/types/grants/pell" target="_blank" class="card-btn btn-auto">Verify at studentaid.gov →</a>
+  </div>
+
+  <!-- #7 NC Need-Based -->
+  <div class="card auto">
+    <div class="rank-badge">#7</div>
+    <div class="card-top">
+      <div class="card-name">NC Need-Based Grant (NCNG)</div>
+      <div class="card-amount">Up to $5,000/yr</div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-deadline-auto">🟢 Automatic via FAFSA</span>
+      <span class="tag tag-category">NC State Need-Based</span>
+    </div>
+    <div class="card-notes">
+      <strong>Free money for NC residents — no essay required.</strong> Automatic for NC residents with financial need who file FAFSA. Pell-eligible students prioritized. Disbursed by school at semester start.
+    </div>
+    <a href="https://ncseaa.edu/college-funding/need-based-grants/north-carolina-need-based-grant/" target="_blank" class="card-btn btn-auto">Verify at ncseaa.edu →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer-note">
+  Last verified: April 27, 2026 · King Neptune by El Barrio AI<br>
+  All 7 opportunities confirmed open. Links tested live.
+</div>
 
 <script>
-// =====================================================================
-// DATA
-// =====================================================================
-
-var DB = [
-  {id:1,name:"Jack Kent Cooke Transfer Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Up to $55,000/year",awardNum:55000,deadline:"Nov 2026",essay:1,score:95.0,status:"HIGH - Opens Oct 1 2026, deadline ~Jan 7 2027",link:"https://apply.jkcf.org/apply/",tier:"fall2026"},
-  {id:2,name:"NASA Aeronautics Scholarship and Advanced STEM Training",type:"Student Grant",cat:"Federal",filter:"student",award:"$15,000-$45,000",awardNum:45000,deadline:"Mar 2027",essay:1,score:93.0,status:"Research",link:"https://intern.nasa.gov/",tier:"soon2027"},
-  {id:3,name:"American Institute of Aeronautics and Astronautics",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,000-$5,000",awardNum:5000,deadline:"Jan 2027",essay:1,score:88.0,status:"HIGH - Opens Oct 15 2026, deadline Jan 31 2027",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:4,name:"Hispanic Scholarship Fund",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$500-$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:87.0,status:"Research",link:"https://www.hsf.net/scholarship",tier:"soon2027"},
-  {id:5,name:"AIAA Foundation Undergraduate Scholarship (Full Suite)",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,000-$15,000",awardNum:15000,deadline:"Jan 2027",essay:1,score:87.0,status:"HIGH - Opens Oct 15 2026, deadline Jan 31 2027",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:6,name:"National Military Family Association",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,500",awardNum:2500,deadline:"Mar 2027",essay:1,score:86.0,status:"Research",link:"https://www.militaryfamily.org/project/scholarships-degree-funding/",tier:"soon2027"},
-  {id:7,name:"PTK All-USA Academic Team",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,500-$5,000",awardNum:5000,deadline:"Jan 2027",essay:1,score:86.0,status:"HIGH - Opens Nov 2026 (confirm CC eligibility)",link:"https://www.ptk.org/scholarships/",tier:"soon2027"},
-  {id:8,name:"Phi Theta Kappa Transfer Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"Varies by school",awardNum:1000,deadline:"Varies",essay:0,score:85.0,status:"APPLY NOW - Check ptk.org for each accepted school",link:"https://www.ptk.org/scholarships/",tier:"now"},
-  {id:9,name:"National Action Council for Minorities in Engineering (NACME)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,500-$5,000",awardNum:5000,deadline:"Mar 2027",essay:0,score:85.0,status:"Research",link:"https://www.nacme.org/scholarships",tier:"soon2027"},
-  {id:10,name:"National Space Club Goddard Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:85.0,status:"HIGH - Opens Nov 2026",link:"https://www.spaceclub.org/scholarship/",tier:"soon2027"},
-  {id:11,name:"AFCEA STEM Teacher/Student Scholarships",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,500-$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:84.0,status:"Research",link:"https://www.afcea.org/education/scholarships",tier:"soon2027"},
-  {id:12,name:"Scholarships for Military Children",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,000",awardNum:2000,deadline:"Feb 2027",essay:0,score:84.0,status:"Research",link:"https://www.fisherhouse.org/programs/scholarship-programs/scholarships-for-military-children/",tier:"soon2027"},
-  {id:13,name:"Lockheed Martin STEM Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Jan 2027",essay:1,score:84.0,status:"Research",link:"https://www.lockheedmartin.com/en-us/who-we-are/communities/stem-education.html",tier:"soon2027"},
-  {id:14,name:"NACME Scholarship at Partner Institution",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Up to $5,000+",awardNum:5000,deadline:"Annual",essay:1,score:84.0,status:"Research",link:"https://www.nacme.org/scholarships",tier:"soon2027"},
-  {id:15,name:"NC Space Grant Consortium",type:"State Aid",cat:"Government",filter:"state",award:"$1,000-$8,500",awardNum:8500,deadline:"Feb 2027",essay:1,score:84.0,status:"Research",link:"https://spacegrant.net/apps/?pk=ncs1",tier:"soon2027"},
-  {id:16,name:"UNCF Scholarships",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,000-$10,000",awardNum:10000,deadline:"Rolling",essay:1,score:83.0,status:"Research",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",tier:"soon2027"},
-  {id:17,name:"SpaceX Scholarship (via AIAA partnership)",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:83.0,status:"Research",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:18,name:"NSBE Mamon & Cynthia Powers Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Jul 2027",essay:1,score:83.0,status:"Research",link:"https://nsbe.org/scholarships/",tier:"soon2027"},
-  {id:19,name:"ScholarSHPE Common Application",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$5,000+",awardNum:5000,deadline:"Apr 2027",essay:1,score:83.0,status:"Research",link:"https://shpe.awardspring.com/Account/Register",tier:"soon2027"},
-  {id:20,name:"Society of Hispanic Professional Engineers (ScholarSHPE)",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Apr 2027",essay:1,score:82.0,status:"Research",link:"https://shpe.org/engage/programs/scholarshpe/",tier:"soon2027"},
-  {id:21,name:"National Society of Black Engineers",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Jan 2027",essay:1,score:82.0,status:"Research",link:"https://nsbe.org/scholarships/",tier:"soon2027"},
-  {id:22,name:"NC Need-Based Grant",type:"State Aid",cat:"State",filter:"state",award:"Up to $3,800/year",awardNum:3800,deadline:"Mar 2027",essay:0,score:82.0,status:"Research",link:"https://www.cfnc.org/pay-for-college/grants-and-scholarships/",tier:"soon2027"},
-  {id:23,name:"Georgia Tech Transfer Merit Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$2,000-$8,000/year",awardNum:8000,deadline:"Rolling",essay:0,score:82.0,status:"APPLY NOW IF ACCEPTED - rolling",link:"https://finaid.gatech.edu/",tier:"now"},
-  {id:24,name:"Great Minds in STEM (GMiS) Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$500-$10,000",awardNum:10000,deadline:"Jun 2026",essay:1,score:82.0,status:"APPLY NOW - June 2026 deadline, contact this week",link:"https://greatmindsinstem.org/gmis-scholarship-application/gmis-scholarships/",tier:"now"},
-  {id:25,name:"UNCF STEM Scholars Program (Fund II Foundation)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$5,000/year",awardNum:5000,deadline:"Rolling",essay:1,score:82.0,status:"Research",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",tier:"soon2027"},
-  {id:26,name:"Congressional Hispanic Caucus Institute (CHCI) Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Apr 2027",essay:1,score:82.0,status:"Research",link:"https://chci.org/programs/",tier:"soon2027"},
-  {id:27,name:"Northrop Grumman Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000-$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:82.0,status:"Research",link:"https://www.northropgrumman.com/careers/",tier:"soon2027"},
-  {id:28,name:"Google Generation Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:82.0,status:"Research",link:"https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship",tier:"soon2027"},
-  {id:29,name:"Congressional Black Caucus Foundation Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,500-$10,000",awardNum:10000,deadline:"Apr 2027",essay:1,score:82.0,status:"Research",link:"https://www.cbcfinc.org/scholarships/",tier:"soon2027"},
-  {id:30,name:"CBC Spouses Education Scholarship (CBCF)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Mar 2027",essay:1,score:82.0,status:"Research",link:"https://cbcfinc.academicworks.com/",tier:"soon2027"},
-  {id:31,name:"National GEM Consortium Fellowship",type:"Fellowship",cat:"Foundation",filter:"fellowship",award:"Full tuition + stipend",awardNum:1000,deadline:"Nov 2026",essay:1,score:82.0,status:"Research",link:"https://www.gemfellowship.org/",tier:"fall2026"},
-  {id:32,name:"AMVETS Scholarship (Child/Grandchild)",type:"Scholarship",cat:"Military",filter:"scholarship",award:"$4,000",awardNum:4000,deadline:"Jan 2027",essay:1,score:81.0,status:"Research",link:"https://www.amvets.org/scholarships/",tier:"soon2027"},
-  {id:33,name:"NC Community College Transfer Grant",type:"State Aid",cat:"State",filter:"state",award:"Up to $3,000",awardNum:3000,deadline:"Rolling",essay:0,score:80.0,status:"Research",link:"https://www.cfnc.org/pay-for-college/grants-and-scholarships/",tier:"soon2027"},
-  {id:34,name:"University of Colorado Boulder Transfer Merit Aid",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$2,000-$8,000/year",awardNum:8000,deadline:"Rolling",essay:0,score:80.0,status:"APPLY NOW - Accepted, rolling deadline",link:"https://www.colorado.edu/financialaid/",tier:"now"},
-  {id:35,name:"Hispanic Heritage Foundation Youth Awards",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Oct 2026",essay:1,score:80.0,status:"Research",link:"https://www.hispanicheritage.org/programs/",tier:"fall2026"},
-  {id:36,name:"Tuskegee Airmen Scholarship Foundation",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,500-$6,000",awardNum:6000,deadline:"Jan 2027",essay:1,score:80.0,status:"Research",link:"https://tuskegeeairmen.org/youth/tuskegee-airmen-scholarship-foundation/",tier:"soon2027"},
-  {id:37,name:"Boeing Company Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:80.0,status:"Research",link:"https://www.boeing.com/careers/campus-university",tier:"soon2027"},
-  {id:38,name:"Raytheon STEM Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000-$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:80.0,status:"Research",link:"https://www.rtx.com/our-company/citizenship-and-sustainability",tier:"soon2027"},
-  {id:39,name:"EAA Aviation Center Scholarship (Ray Foundation)",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Jan 2027",essay:1,score:80.0,status:"Research",link:"https://www.eaa.org/youth",tier:"soon2027"},
-  {id:40,name:"NSBE Angela Barbee Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Jul 2027",essay:1,score:80.0,status:"Research",link:"https://nsbe.org/scholarships/",tier:"soon2027"},
-  {id:41,name:"NSBE Hatch Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Jul 2027",essay:1,score:80.0,status:"Research",link:"https://nsbe.org/scholarships/",tier:"soon2027"},
-  {id:42,name:"NSBE Analog Devices Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Jul 2027",essay:1,score:80.0,status:"Research",link:"https://nsbe.org/scholarships/",tier:"soon2027"},
-  {id:43,name:"L3Harris Technologies Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000-$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:80.0,status:"Research",link:"https://www.l3harris.com/careers/students-and-new-grads",tier:"soon2027"},
-  {id:44,name:"General Electric (GE) Aerospace Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000-$10,000",awardNum:10000,deadline:"Mar 2027",essay:1,score:80.0,status:"Research",link:"https://www.geaerospace.com/careers",tier:"soon2027"},
-  {id:45,name:"Astronaut Scholarship Foundation",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$15,000",awardNum:15000,deadline:"Apr 2027",essay:1,score:79.0,status:"Research",link:"https://astronautscholarship.org/",tier:"soon2027"},
-  {id:46,name:"Hero's Legacy Scholarship (Fisher House)",type:"Scholarship",cat:"Military",filter:"scholarship",award:"$2,500",awardNum:2500,deadline:"Jan 2027",essay:0,score:79.0,status:"Research",link:"https://www.fisherhouse.org/programs/",tier:"soon2027"},
-  {id:47,name:"Elks Most Valuable Student Award",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$4,000-$50,000",awardNum:50000,deadline:"Nov 2026",essay:1,score:79.0,status:"Research",link:"https://www.elks.org/scholars/scholarships/MVS.cfm",tier:"fall2026"},
-  {id:48,name:"Collins Aerospace Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:79.0,status:"Research",link:"https://www.collinsaerospace.com/careers/students-and-recent-graduates",tier:"soon2027"},
-  {id:49,name:"Pratt & Whitney Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:79.0,status:"Research",link:"https://careers.rtx.com/global/en/pratt-whitney",tier:"soon2027"},
-  {id:50,name:"Iowa State University Transfer Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$1,000-$4,000/year",awardNum:4000,deadline:"Rolling",essay:0,score:78.0,status:"APPLY NOW - Accepted, rolling deadline",link:"https://www.financialaid.iastate.edu/types-of-aid/scholarships/",tier:"now"},
-  {id:51,name:"MAES Latinos in Science and Engineering Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"May 2027",essay:1,score:78.0,status:"Research",link:"https://mymaes.org/programs/",tier:"soon2027"},
-  {id:52,name:"UNCF/Koch Scholars Program",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Up to $5,000/year",awardNum:5000,deadline:"Rolling",essay:1,score:78.0,status:"Research",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",tier:"soon2027"},
-  {id:53,name:"Freedom Alliance Scholarship",type:"Scholarship",cat:"Military",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Apr 2027",essay:0,score:78.0,status:"Research",link:"https://freedomalliance.org/scholarship-fund/",tier:"soon2027"},
-  {id:54,name:"Ford Motor Company STEM Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$1,500-$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:78.0,status:"Research",link:"https://www.fordphilanthropy.org/",tier:"soon2027"},
-  {id:55,name:"Microsoft Scholarship Program",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:78.0,status:"Research",link:"https://careers.microsoft.com/students",tier:"soon2027"},
-  {id:56,name:"Aerospace Industries Association (AIA) Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Annual",essay:1,score:78.0,status:"Research",link:"https://www.aia-aerospace.org/",tier:"soon2027"},
-  {id:57,name:"BEYA STEM Conference Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Jan 2027",essay:1,score:78.0,status:"Research",link:"https://www.beya.org/",tier:"soon2027"},
-  {id:58,name:"Purdue University Minority Engineering Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$2,000-$6,000/year",awardNum:6000,deadline:"Rolling",essay:1,score:77.0,status:"Pending Decision",link:"https://engineering.purdue.edu/Engr/AboutUs/DiversityInitiatives",tier:"now"},
-  {id:59,name:"League of United Latin American Citizens (LULAC) Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$250-$2,000",awardNum:2000,deadline:"Mar 2027",essay:1,score:77.0,status:"Research",link:"https://lulac.org/programs/education/scholarships/",tier:"soon2027"},
-  {id:60,name:"Alpha Kappa Alpha Educational Advancement Foundation",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$3,000",awardNum:3000,deadline:"Apr 2027",essay:1,score:77.0,status:"Research",link:"https://akaeaf.net/",tier:"soon2027"},
-  {id:61,name:"Dr. Juan Andrade Jr. Scholarship for Young Hispanic Leaders",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Rolling",essay:1,score:77.0,status:"Research",link:"https://www.ushli.org/dr-juan-andrade-jr-scholarship-for-young-hispanic-leaders/",tier:"soon2027"},
-  {id:62,name:"TMCF Access Scholarships",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Tuition + fees + housing",awardNum:1000,deadline:"Annual",essay:1,score:77.0,status:"Research",link:"https://tmcf.org/scholarships/open-scholarships/",tier:"soon2027"},
-  {id:63,name:"Maryland Space Business Roundtable Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:77.0,status:"Research",link:"https://www.msbr.org/scholarship.html",tier:"soon2027"},
-  {id:64,name:"Virginia Tech Transfer Merit Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$2,000-$5,000/year",awardNum:5000,deadline:"Rolling",essay:0,score:76.0,status:"APPLY NOW - Accepted, rolling deadline",link:"https://sfs.vt.edu/scholarships.html",tier:"now"},
-  {id:65,name:"Tau Beta Pi Engineering Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,000-$10,000",awardNum:10000,deadline:"Jan 2027",essay:1,score:76.0,status:"Research",link:"https://www.tbp.org/scholarships.cfm",tier:"soon2027"},
-  {id:66,name:"Frederick Douglass Bicentennial Scholarship (UNCF)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Rolling",essay:1,score:76.0,status:"Research",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",tier:"soon2027"},
-  {id:67,name:"Gordon C. Oates Air Breathing Propulsion Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$2,500",awardNum:2500,deadline:"Mar 2027",essay:1,score:76.0,status:"Research",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:68,name:"Dell Technologies Scholarship",type:"Scholarship",cat:"Corporate",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:76.0,status:"Research",link:"https://www.dell.com/en-us/dt/corporate/social-impact.htm",tier:"soon2027"},
-  {id:69,name:"National Hispanic Media Coalition Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,000-$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:76.0,status:"Research",link:"https://www.nhmc.org/",tier:"soon2027"},
-  {id:70,name:"LULAC National Scholarship Fund (Local Council)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Varies",essay:1,score:76.0,status:"Research",link:"https://lnesc.org/scholarships/",tier:"soon2027"},
-  {id:71,name:"AIAA Orville & Wilbur Wright Graduate Award",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$5,000",awardNum:5000,deadline:"Jan 2027",essay:0,score:76.0,status:"Research",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:72,name:"Virginia Space Grant Consortium Scholarship",type:"State Aid",cat:"Government",filter:"state",award:"$1,000-$8,500",awardNum:8500,deadline:"Feb 2027",essay:1,score:76.0,status:"Research",link:"https://vsgc.odu.edu/",tier:"soon2027"},
-  {id:73,name:"Colorado Space Grant Consortium",type:"Student Grant",cat:"Government",filter:"student",award:"$1,000-$5,000",awardNum:5000,deadline:"Feb 2027",essay:1,score:76.0,status:"Research",link:"https://spacegrant.colorado.edu/",tier:"soon2027"},
-  {id:74,name:"Maryland Transfer Merit Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$1,000-$3,000/year",awardNum:3000,deadline:"Rolling",essay:0,score:75.0,status:"APPLY NOW - Accepted, rolling deadline",link:"https://financialaid.umd.edu/",tier:"now"},
-  {id:75,name:"Ohio State Transfer Scholarship",type:"Institutional Aid",cat:"School",filter:"institutional",award:"$2,000-$5,000/year",awardNum:5000,deadline:"Rolling",essay:0,score:75.0,status:"APPLY NOW - Accepted, rolling deadline",link:"https://sfa.osu.edu/",tier:"now"},
-  {id:76,name:"American Meteorological Society Minority Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$3,000",awardNum:3000,deadline:"Feb 2027",essay:1,score:75.0,status:"Research",link:"https://www.ametsoc.org/ams/index.cfm/information-for/students/ams-scholarships-and-fellowships/",tier:"soon2027"},
-  {id:77,name:"NC Scholars Program",type:"State Aid",cat:"State",filter:"state",award:"$500-$3,000/year",awardNum:3000,deadline:"Mar 2027",essay:0,score:74.0,status:"Research",link:"https://www.cfnc.org/pay-for-college/grants-and-scholarships/",tier:"soon2027"},
-  {id:78,name:"Imagine America Foundation",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000",awardNum:1000,deadline:"Rolling",essay:0,score:74.0,status:"Research",link:"https://www.imagine-america.org/students/",tier:"soon2027"},
-  {id:79,name:"Society of Automotive Engineers (SAE) Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$10,000",awardNum:10000,deadline:"Feb 2027",essay:1,score:74.0,status:"Research",link:"https://www.sae.org/scholarships",tier:"soon2027"},
-  {id:80,name:"David Alan Quick Scholarship (AIAA)",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000",awardNum:1000,deadline:"Feb 2027",essay:1,score:74.0,status:"Research",link:"https://www.aiaa-awards.org/a",tier:"soon2027"},
-  {id:81,name:"Omega Psi Phi George E. Meares Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$3,000",awardNum:3000,deadline:"Rolling",essay:1,score:74.0,status:"Research",link:"https://www.omegapsiphifraternity.org/",tier:"soon2027"},
-  {id:82,name:"TMCF Gap Completion Grant",type:"Student Grant",cat:"Foundation",filter:"student",award:"Varies",awardNum:1000,deadline:"Rolling",essay:0,score:74.0,status:"Research",link:"https://tmcf.org/scholarships/open-scholarships/",tier:"soon2027"},
-  {id:83,name:"National Society of Professional Engineers (NSPE) Scholarship",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:74.0,status:"Research",link:"https://www.nspe.org/resources/students/scholarships",tier:"soon2027"},
-  {id:84,name:"VA Fry Scholarship (Marine Gunnery Sergeant John David Fry)",type:"Federal Aid",cat:"Federal",filter:"federal",award:"Full tuition + housing + books",awardNum:1000,deadline:"Rolling",essay:0,score:73.0,status:"Research",link:"https://www.va.gov/education/survivor-dependent-education-assistance/",tier:"soon2027"},
-  {id:85,name:"Thurgood Marshall College Fund",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$2,200-$5,000",awardNum:5000,deadline:"Mar 2027",essay:1,score:72.0,status:"Research",link:"https://www.tmcf.org/students-alumni/scholarship/",tier:"soon2027"},
-  {id:86,name:"QuestBridge National College Match",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Full 4-year scholarship",awardNum:4,deadline:"Sep 2026",essay:1,score:72.0,status:"Research",link:"https://www.questbridge.org/",tier:"fall2026"},
-  {id:87,name:"Alpha Phi Alpha Educational Foundation Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$2,000",awardNum:2000,deadline:"Rolling",essay:1,score:72.0,status:"Research",link:"https://www.alphaphialpha.net/foundation/",tier:"soon2027"},
-  {id:88,name:"Daughters of the American Revolution STEM Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Feb 2027",essay:1,score:72.0,status:"Research",link:"https://www.dar.org/national-society/scholarships",tier:"soon2027"},
-  {id:89,name:"Engineers Foundation of Ohio Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$1,000-$3,500",awardNum:3500,deadline:"Jan 2027",essay:1,score:71.0,status:"Research",link:"https://www.efostem.org/",tier:"soon2027"},
-  {id:90,name:"IAM Scholarship (Machinists & Aerospace Workers)",type:"Scholarship",cat:"Association",filter:"scholarship",award:"$1,000-$2,000",awardNum:2000,deadline:"Mar 2027",essay:0,score:70.0,status:"Research",link:"https://www.goiam.org/benefits/scholarships/",tier:"soon2027"},
-  {id:91,name:"Scholarships360 Making the Leap (Transfer)",type:"Scholarship",cat:"Aggregator",filter:"scholarship",award:"$1,000",awardNum:1000,deadline:"Jan 2027",essay:1,score:68.0,status:"Research",link:"https://scholarships360.org/scholarships/search/making-the-leap-scholarship-for-transfer-students/",tier:"soon2027"},
-  {id:92,name:"DAR American Indian Scholarship (open to military family)",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Feb 2027",essay:1,score:68.0,status:"Research",link:"https://www.dar.org/national-society/scholarships",tier:"soon2027"},
-  {id:93,name:"College Board Opportunity Scholarships",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$500-$40,000",awardNum:40000,deadline:"Rolling",essay:0,score:65.0,status:"Research",link:"https://bigfuture.collegeboard.org/pay-for-college/scholarship-search",tier:"soon2027"},
-  {id:94,name:"Scholarships360 $10K No Essay",type:"Scholarship",cat:"Aggregator",filter:"scholarship",award:"$10,000",awardNum:10000,deadline:"Jun 2026",essay:0,score:65.0,status:"Research",link:"https://scholarships360.org/scholarships/search/10000-no-essay-scholarship/",tier:"now"},
-  {id:95,name:"Zeta Phi Beta General Scholarship",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"$500-$1,000",awardNum:1000,deadline:"Rolling",essay:1,score:65.0,status:"Research",link:"https://www.zphib1920.org/nef/",tier:"soon2027"},
-  {id:96,name:"National Scholarship Providers Association",type:"Scholarship",cat:"Foundation",filter:"scholarship",award:"Varies",awardNum:1000,deadline:"Rolling",essay:0,score:60.0,status:"Research",link:"https://www.scholarshipproviders.org/",tier:"soon2027"}
-];
-
-// =====================================================================
-// ESSAYS DATA
-// =====================================================================
-var ESSAYS = [
-  {
-    id:"gates",
-    name:"Gates Scholarship",
-    status:"ready",
-    icon:"✅",
-    deadline:"September 2026",
-    award:"Full Cost of Attendance",
-    link:"https://www.thegatesscholarship.org/",
-    strategy:null,
-    paragraphs:[
-      "The morning I walked into my first college classroom, I was 15 years old.",
-      "Not visiting. Not shadowing. Enrolled.",
-      "While most of my peers were navigating high school hallways, I was sitting in Calculus I — taking notes, doing the work, trying not to let anyone see that I was the youngest person in the room by several years. I had no roadmap for what I was doing. I just knew that if I was going to get to NASA, I could not afford to move at the standard pace.",
-      "I grew up in a military family in North Carolina, the kind of household where discipline is not a philosophy — it is a practice. My family sacrificed consistently and quietly so that I could have options they did not. That reality was not lost on me. It was fuel.",
-      "By 16, I had joined Phi Theta Kappa Honor Society — an organization most students don't encounter until they're two years into college. By 18, I had completed my Associate of Science degree with a 3.52 college GPA and a 3.95 high school GPA, earned Dean's List recognition across multiple terms, and logged over 60 college credits. I did all of this while working approximately 20 hours a week at Sonic, competing on my school's varsity tennis team, and training in martial arts.",
-      "None of that is a complaint. It is context.",
-      "Context for what it takes to accelerate — not just academically, but in every dimension of life simultaneously. Context for what financial constraint actually looks like when you are trying to build something from the ground up. My family's income sits around $55,000 a year. Every dollar I have invested in my education has been deliberate. There is no margin for miscalculation.",
-      "My goal is aerospace engineering. Specifically, I want to work at NASA.",
-      "That is not a dream I stumbled into. It is a direction I have been building toward with intention. I have attended two engineering summer programs where I built and programmed robotic systems from scratch — learning that the gap between an idea and a functional machine is filled entirely by discipline and problem-solving. Those programs showed me exactly the kind of work I want to spend my life doing: systems that move, adapt, and operate in environments humans cannot easily reach.",
-      "I have been accepted to five universities with strong aerospace programs — Colorado Boulder, Maryland, Virginia Tech, Iowa State, and Ohio State — and I am awaiting decisions from Georgia Tech and Purdue. These are not safety schools. These are programs I chose because they are serious, and I intend to be serious inside them.",
-      "The Gates Scholarship would change the math entirely.",
-      "Right now, the question of where I attend is inseparable from the question of what I can afford. A full scholarship means I choose based on fit, research opportunity, and proximity to the industry — not based on which school offers the smallest debt load. It means I can say yes to an undergraduate research position without calculating whether the stipend covers my groceries. It means I can apply to NASA internships without budgeting around whether I can afford to relocate for the summer.",
-      "It means I can finish what I started at 15 — without the financial weight that has quietly shaped every decision along the way.",
-      "I am a Latino and Black student in a field where people who look like me make up a small fraction of the workforce. I am aware of that. I am also aware that the students who change that statistic are not the ones who waited for permission — they are the ones who showed up early, did the work, and refused to let the number on a tuition bill determine what they were capable of becoming.",
-      "I showed up early.",
-      "The Gates Scholarship is how I finish the race."
-    ],
-    checklist:["Verify word count matches portal (500-650 words)","Confirm Pell Grant eligibility documented via FAFSA","Request 2 recommendation letters (allow 6+ weeks)","Gather: transcript, FAFSA SAR, activity list","Submit early — reviewers note early submissions favorably","Verify transfer eligibility: admissions@thegatesscholarship.org"]
-  },
-  {
-    id:"jkc",
-    name:"Jack Kent Cooke Transfer Scholarship",
-    status:"strategy",
-    icon:"📝",
-    deadline:"November 2026",
-    award:"Up to $55,000/year",
-    link:"https://www.jkcf.org/our-scholarships/",
-    strategy:["Lead with the transfer journey — 15 years old in Calculus I is your opening hook","Emphasize financial need explicitly: $55K family income, Pell-eligible, working 20hrs/week","PTK membership at 16 makes you a textbook JKC candidate — their scholarship was designed for you","Frame NASA as your north star — every paragraph should point toward it","Adaptation plan: use Gates essay as base, add transfer-specific angle in paragraphs 2 and 4","Request recommendations NOW — JKC requires strong faculty endorsements","JKC is the #1 scored opportunity at 95. This is your highest-priority essay."],
-    paragraphs:null,
-    checklist:["Adapt Gates essay for JKC transfer focus","Secure 2-3 strong faculty recommendation letters","Verify current cycle opens October 2026 at jkcf.org","Gather: transcript, FAFSA, PTK verification, activity list"]
-  },
-  {
-    id:"nasa",
-    name:"NASA Aeronautics Scholarship",
-    status:"strategy",
-    icon:"📝",
-    deadline:"March 2027",
-    award:"$15,000-$45,000",
-    link:"https://www.nasa.gov/stem/",
-    strategy:["Lead with the robotics programming experience — built systems from scratch in summer programs","Name specific NASA missions or programs that align with your aerospace interest","Emphasize the direct pipeline: A.S. at 18 shows you're already ahead of schedule","60+ credits + 3.52 GPA proves you can handle rigorous undergraduate research","US citizen + STEM major + GPA 3.0+ — you clear every filter","Military family discipline angle: systematic, reliable, mission-focused","Apply concurrently to NASA internships — scholarship + internship reinforces the pipeline"],
-    paragraphs:null,
-    checklist:["Research specific NASA Aeronautics programs to name in essay","Write aerospace-specific essay focusing on robotics experience","Contact faculty for recommendations — research angle needed","Deadline March 2027 — start essay draft by December 2026"]
-  },
-  {
-    id:"hsf",
-    name:"Hispanic Scholarship Fund",
-    status:"strategy",
-    icon:"📝",
-    deadline:"February 2027",
-    award:"$500-$5,000",
-    link:"https://www.hsf.net/scholarship",
-    strategy:["Textbook HSF candidate: Latino + STEM + Pell-eligible + strong GPA","Financial need is central to HSF's mission — own the $55K family income detail","Community angle: military family service, PTK leadership, Phi Theta Kappa","Shorter essay than Gates (typically 500 words) — can adapt your intro and conclusion","FAFSA must be filed first — confirm HSF family income threshold eligibility","HSF awards are renewable — frame your 4-year plan for aerospace engineering","Opens August 2026 — prepare FAFSA and documents over the summer"],
-    paragraphs:null,
-    checklist:["Confirm FAFSA filed and HSF income threshold met","Adapt Gates essay intro for HSF (Latino identity + STEM focus)","Deadline February 2027 — submit by January for safety","HSF portal: hsf.net/scholarship — create account early"]
-  },
-  {
-    id:"ronbrown",
-    name:"Ron Brown Scholar Program",
-    status:"strategy",
-    icon:"📝",
-    deadline:"January 2027",
-    award:"$10,000/year",
-    link:"https://www.ronbrown.org/",
-    strategy:["VERIFY FIRST: Ron Brown typically awards HS seniors. Contact foundation before investing essay time","Email: info@ronbrown.org — ask explicitly whether transfer students count as first-year applicants","If eligible: Black identity + community service + leadership is your trifecta","PTK Honor Society + Dean's List shows academic excellence — lead with numbers","Military family sacrifice narrative aligns with Ron Brown's mission values","Community involvement angle: what have you given back, not just what you've achieved","Renewable $10K/year = $40K total. Worth the verification call."],
-    paragraphs:null,
-    checklist:["FIRST: Email info@ronbrown.org to verify transfer eligibility","If eligible: write Black identity + community essay","Deadline January 2027 — confirm and pivot fast if eligible","Gather community service documentation now regardless"]
-  }
-];
-
-// =====================================================================
-// EMAILS DATA
-// =====================================================================
-var EMAILS = [
-  {
-    id:"gates-verify",
-    icon:"🏆",
-    name:"Gates Scholarship — Verify Eligibility",
-    to:"admissions@thegatesscholarship.org",
-    subject:"Transfer Student Eligibility Inquiry — Gates Scholarship",
-    preview:"Contact Gates to confirm whether community college transfer students are eligible. This is CRITICAL before investing essay time.",
-    link:"mailto:admissions@thegatesscholarship.org?subject=Transfer%20Student%20Eligibility%20Inquiry%20-%20Gates%20Scholarship",
-    isMailto:true,
-    note:"DO THIS FIRST: Confirm transfer eligibility before the application cycle opens."
-  },
-  {
-    id:"jkc-verify",
-    icon:"💎",
-    name:"Jack Kent Cooke — Program Inquiry",
-    to:"programoperations@jkcf.org",
-    subject:"Transfer Student Application Inquiry — JKC Scholarship",
-    preview:"JKC is designed for transfer students. Introduce yourself early and ask about the October 2026 application opening.",
-    link:"mailto:programoperations@jkcf.org?subject=Transfer%20Student%20Application%20Inquiry%20-%20JKC%20Scholarship",
-    isMailto:true,
-    note:"JKC is BUILT for transfer students. This is your #1 opportunity — score 95."
-  },
-  {
-    id:"cu-boulder",
-    icon:"🏔️",
-    name:"CU Boulder — Merit Aid Request",
-    to:"finaid@colorado.edu",
-    subject:"Transfer Merit Scholarship Inquiry — Aerospace Engineering, Fall 2026",
-    preview:"Request review of all available transfer merit scholarships, departmental awards, and STEM grants. Mention PTK, Pell, military family, 3.52 GPA.",
-    link:"mailto:finaid@colorado.edu?subject=Transfer%20Merit%20Scholarship%20Inquiry%20-%20Aerospace%20Engineering%20Fall%202026",
-    isMailto:true,
-    note:null
-  },
-  {
-    id:"maryland",
-    icon:"🐢",
-    name:"Maryland — Merit Aid Request",
-    to:"sfa@umd.edu",
-    subject:"Transfer Merit Scholarship Inquiry — Aerospace Engineering, Fall 2026",
-    preview:"Inquire about Clark School of Engineering awards, transfer merit grants, and diversity-focused STEM scholarships available to incoming transfer students.",
-    link:"mailto:sfa@umd.edu?subject=Transfer%20Merit%20Scholarship%20Inquiry%20-%20Aerospace%20Engineering%20Fall%202026",
-    isMailto:true,
-    note:null
-  },
-  {
-    id:"vt",
-    icon:"🦃",
-    name:"Virginia Tech — Merit Aid Request",
-    to:"finaid@vt.edu",
-    subject:"Transfer Merit Scholarship Inquiry — Aerospace Engineering, Fall 2026",
-    preview:"Request College of Engineering transfer awards and diversity-focused scholarships. Reference 3.52 GPA, PTK, military family, Pell eligibility.",
-    link:"mailto:finaid@vt.edu?subject=Transfer%20Merit%20Scholarship%20Inquiry%20-%20Aerospace%20Engineering%20Fall%202026",
-    isMailto:true,
-    note:null
-  },
-  {
-    id:"iowa-state",
-    icon:"🌽",
-    name:"Iowa State — Merit Aid Request",
-    to:"financialaid@iastate.edu",
-    subject:"Transfer Merit Scholarship Inquiry — Aerospace Engineering, Fall 2026",
-    preview:"Ask about ISU transfer scholarships and College of Engineering awards. Mention minority STEM background and financial need.",
-    link:"mailto:financialaid@iastate.edu?subject=Transfer%20Merit%20Scholarship%20Inquiry%20-%20Aerospace%20Engineering%20Fall%202026",
-    isMailto:true,
-    note:null
-  },
-  {
-    id:"ohio-state",
-    icon:"🌰",
-    name:"Ohio State — Merit Aid Request",
-    to:"sfa@osu.edu",
-    subject:"Transfer Merit Scholarship Inquiry — Aerospace Engineering, Fall 2026",
-    preview:"Inquire about Buckeye transfer merit aid, College of Engineering grants, and diversity/need-based awards for incoming Fall 2026 transfer students.",
-    link:"mailto:sfa@osu.edu?subject=Transfer%20Merit%20Scholarship%20Inquiry%20-%20Aerospace%20Engineering%20Fall%202026",
-    isMailto:true,
-    note:null
-  }
-];
-
-// =====================================================================
-// SCHOOLS DATA
-// =====================================================================
-var SCHOOLS = [
-  {
-    name:"CU Boulder",
-    fullName:"University of Colorado Boulder",
-    program:"Aerospace Engineering",
-    status:"Accepted",
-    email:"finaid@colorado.edu",
-    phone:"303-492-5091",
-    merit:"$2,000-$8,000/year (transfer merit, rolling)",
-    aidLink:"https://www.colorado.edu/financialaid/",
-    engLink:"https://www.colorado.edu/aerospace/",
-    note:"Apply for transfer merit aid immediately. Space Grant Consortium eligible if attending here."
-  },
-  {
-    name:"Maryland",
-    fullName:"University of Maryland",
-    program:"Aerospace Engineering",
-    status:"Accepted",
-    email:"sfa@umd.edu",
-    phone:"301-314-9000",
-    merit:"$1,000-$3,000/year (transfer merit) + Clark School departmental awards",
-    aidLink:"https://financialaid.umd.edu/",
-    engLink:"https://eng.umd.edu/undergraduate/scholarships",
-    note:"Maryland Space Business Roundtable Scholarship ($5K) is exclusive to UMD students - high priority if attending."
-  },
-  {
-    name:"Virginia Tech",
-    fullName:"Virginia Tech",
-    program:"Aerospace Engineering",
-    status:"Accepted",
-    email:"finaid@vt.edu",
-    phone:"540-231-5179",
-    merit:"$2,000-$5,000/year (transfer merit, GPA 3.3+)",
-    aidLink:"https://sfs.vt.edu/scholarships.html",
-    engLink:"https://eng.vt.edu/undergrad/scholarships.html",
-    note:"Virginia Space Grant Consortium ($1K-$8.5K) unlocks if attending VT - strong aerospace add-on."
-  },
-  {
-    name:"Iowa State",
-    fullName:"Iowa State University",
-    program:"Aerospace Engineering",
-    status:"Accepted",
-    email:"financialaid@iastate.edu",
-    phone:"515-294-2223",
-    merit:"$1,000-$4,000/year (transfer merit, GPA 3.0+)",
-    aidLink:"https://www.financialaid.iastate.edu/",
-    engLink:"https://www.engineering.iastate.edu/future-students/scholarships/",
-    note:"Strong aerospace program + lower cost of living than East Coast schools. Merit aid renewable."
-  },
-  {
-    name:"Ohio State",
-    fullName:"The Ohio State University",
-    program:"Aerospace Engineering",
-    status:"Accepted",
-    email:"sfa@osu.edu",
-    phone:"614-292-0300",
-    merit:"$2,000-$5,000/year (transfer merit, GPA 3.3+)",
-    aidLink:"https://sfa.osu.edu/",
-    engLink:"https://engineering.osu.edu/current-students/scholarships",
-    note:"Engineers Foundation of Ohio Scholarship ($1K-$3.5K) applies if attending OSU. Buckeye strong aerospace network."
-  }
-];
-
-// =====================================================================
-// PIPELINE DATA (top 15)
-// =====================================================================
-var PIPELINE_TOP15 = DB.slice(0, 15);
-
-// =====================================================================
-// STATE
-// =====================================================================
-var currentFilter = "all";
-var currentSort = "score";
-var currentSearch = "";
-
-function getApplied(id) {
-  try { return localStorage.getItem("applied_" + id) === "1"; } catch(e) { return false; }
-}
-function setApplied(id, val) {
-  try { localStorage.setItem("applied_" + id, val ? "1" : "0"); } catch(e) {}
-}
-function getSent(id) {
-  try { return localStorage.getItem("sent_" + id) === "1"; } catch(e) { return false; }
-}
-function setSent(id, val) {
-  try { localStorage.setItem("sent_" + id, val ? "1" : "0"); } catch(e) {}
-}
-
-// =====================================================================
-// SCORE TIER
-// =====================================================================
-function scoreTierClass(score) {
-  if (score >= 85) return "score-tier-a";
-  if (score >= 75) return "score-tier-b";
-  return "score-tier-c";
-}
-function filterBadgeClass(f) {
-  var m = {scholarship:"badge-scholarship",federal:"badge-federal",state:"badge-state",military:"badge-military",corporate:"badge-corporate",institutional:"badge-institutional",fellowship:"badge-fellowship"};
-  return m[f] || "badge-scholarship";
-}
-function filterBadgeLabel(f) {
-  var m = {scholarship:"Scholarship",federal:"Federal",state:"State",military:"Military",corporate:"Corporate",institutional:"Institutional",fellowship:"Fellowship"};
-  return m[f] || f;
-}
-
-// =====================================================================
-// COUNTDOWN TIMER
-// =====================================================================
-function buildCountdown(targetDate, containerId) {
-  var el = document.getElementById(containerId);
-  if (!el) return;
-  function update() {
-    var now = new Date();
-    var diff = targetDate - now;
-    if (diff <= 0) { el.innerHTML = '<span style="color:#e74c3c;font-weight:900">DEADLINE PASSED</span>'; return; }
-    var days = Math.floor(diff / 86400000);
-    var hrs = Math.floor((diff % 86400000) / 3600000);
-    var mins = Math.floor((diff % 3600000) / 60000);
-    el.innerHTML =
-      '<div class="timer-unit"><span class="timer-num">' + days + '</span><span class="timer-label">Days</span></div>' +
-      '<div class="timer-sep">:</div>' +
-      '<div class="timer-unit"><span class="timer-num">' + String(hrs).padStart(2,"0") + '</span><span class="timer-label">Hours</span></div>' +
-      '<div class="timer-sep">:</div>' +
-      '<div class="timer-unit"><span class="timer-num">' + String(mins).padStart(2,"0") + '</span><span class="timer-label">Mins</span></div>';
-  }
-  update();
-  setInterval(update, 60000);
-}
-
-// =====================================================================
-// TAB NAVIGATION
-// =====================================================================
-var TABS = ["hero","pipeline","opportunities","essays","emails","schools","money","master"];
-
-function showTab(name) {
-  for (var i = 0; i < TABS.length; i++) {
-    var t = TABS[i];
-    var btn = document.getElementById("tab-" + t);
-    var sec = document.getElementById("section-" + t);
-    if (btn) btn.classList.remove("active");
-    if (sec) sec.classList.remove("active");
-  }
-  var activeBtn = document.getElementById("tab-" + name);
-  var activeSec = document.getElementById("section-" + name);
-  if (activeBtn) activeBtn.classList.add("active");
-  if (activeSec) activeSec.classList.add("active");
-  window.scrollTo(0, 0);
-}
-
-document.getElementById("tab-hero").onclick = function() { showTab("hero"); };
-document.getElementById("tab-pipeline").onclick = function() { showTab("pipeline"); };
-document.getElementById("tab-opportunities").onclick = function() { showTab("opportunities"); };
-document.getElementById("tab-essays").onclick = function() { showTab("essays"); };
-document.getElementById("tab-emails").onclick = function() { showTab("emails"); };
-document.getElementById("tab-schools").onclick = function() { showTab("schools"); };
-document.getElementById("tab-money").onclick = function() { showTab("money"); };
-document.getElementById("tab-master").onclick = function() { showTab("master"); loadMasterOpps(); };
-
-// =====================================================================
-// BUILD PIPELINE
-// =====================================================================
-function buildPipeline() {
-  var cols = {
-    "not-started": document.getElementById("pipe-col-not-started"),
-    "in-progress": document.getElementById("pipe-col-in-progress"),
-    "essay-ready": document.getElementById("pipe-col-essay-ready"),
-    "submitted": document.getElementById("pipe-col-submitted")
+function updateCDs() {
+  const now = new Date();
+  const deadlines = {
+    'shpe-cd':  { date: new Date('2026-04-30T23:59:00'), cls: 'red' },
+    'suli-cd':  { date: new Date('2026-05-20T17:00:00'), cls: 'orange' },
+    'nasa-cd':  { date: new Date('2026-05-22T23:59:00'), cls: 'orange' }
   };
-  var counts = {"not-started":0,"in-progress":0,"essay-ready":0,"submitted":0};
-
-  for (var i = 0; i < PIPELINE_TOP15.length; i++) {
-    var opp = PIPELINE_TOP15[i];
-    var colKey = opp.pipeline || "not-started";
-    counts[colKey]++;
-    var tierClass = scoreTierClass(opp.score);
-    var card = document.createElement("div");
-    card.className = "pipeline-card";
-    card.innerHTML =
-      '<div class="pipe-card-name">' + opp.name + '</div>' +
-      '<div class="pipe-card-meta">' +
-        '<span class="pipe-score ' + tierClass + '">' + opp.score + '</span>' +
-        '<span class="pipe-deadline">' + opp.deadline + '</span>' +
-      '</div>' +
-      '<div class="pipe-award">' + opp.award + '</div>' +
-      '<a href="' + opp.link + '" target="_blank" class="pipe-apply-btn">Apply →</a>';
-    cols[colKey].appendChild(card);
-  }
-
-  for (var key in counts) {
-    var countEl = document.getElementById("pipe-count-" + ["not-started","in-progress","essay-ready","submitted"].indexOf(key));
-    if (countEl) countEl.textContent = counts[key];
+  for (const [id, info] of Object.entries(deadlines)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const diff = info.date - now;
+    if (diff <= 0) { el.textContent = 'CLOSED'; continue; }
+    const days = Math.floor(diff / 86400000);
+    const hrs  = Math.floor((diff % 86400000) / 3600000);
+    el.textContent = days > 0 ? `${days}d ${hrs}h left` : `${hrs}h left`;
   }
 }
-
-// =====================================================================
-// BUILD OPPORTUNITIES
-// =====================================================================
-function getFilteredSorted() {
-  var result = DB.slice();
-  if (currentFilter !== "all") {
-    result = result.filter(function(o) { return o.filter === currentFilter; });
-  }
-  if (currentSearch) {
-    var q = currentSearch.toLowerCase();
-    result = result.filter(function(o) {
-      return o.name.toLowerCase().indexOf(q) >= 0 || o.award.toLowerCase().indexOf(q) >= 0 || o.cat.toLowerCase().indexOf(q) >= 0;
-    });
-  }
-  if (currentSort === "score") {
-    result.sort(function(a,b) { return b.score - a.score; });
-  } else if (currentSort === "deadline") {
-    result.sort(function(a,b) { return a.deadlineSort.localeCompare(b.deadlineSort); });
-  } else if (currentSort === "award") {
-    result.sort(function(a,b) { return b.awardNum - a.awardNum; });
-  }
-  return result;
-}
-
-function buildOppCards(data) {
-  var grid = document.getElementById("opp-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
-  var countEl = document.getElementById("opp-count");
-  if (countEl) countEl.textContent = "Showing " + data.length + " of " + DB.length + " opportunities";
-  if (data.length === 0) {
-    grid.innerHTML = '<div class="empty-state">No opportunities match your search.</div>';
-    return;
-  }
-  for (var i = 0; i < data.length; i++) {
-    var o = data[i];
-    var applied = getApplied(o.id);
-    var tierClass = scoreTierClass(o.score);
-    var badgeClass = filterBadgeClass(o.filter);
-    var badgeLabel = filterBadgeLabel(o.filter);
-    var applyHref = o.link;
-
-    var card = document.createElement("div");
-    card.className = "opp-card" + (applied ? " applied" : "");
-    card.setAttribute("data-id", o.id);
-
-    var html =
-      (applied ? '<div class="applied-overlay">✓ Applied</div>' : "") +
-      '<div class="opp-card-top">' +
-        '<div class="opp-name">' + o.name + '</div>' +
-        '<span class="opp-score-badge ' + tierClass + '">' + o.score + '</span>' +
-      '</div>' +
-      '<div class="opp-badges">' +
-        '<span class="opp-type-badge ' + badgeClass + '">' + badgeLabel + '</span>' +
-        (o.renewable ? '<span class="opp-type-badge" style="background:rgba(46,204,113,0.12);color:#2ecc71">Renewable</span>' : '') +
-        (o.essay ? '<span class="opp-type-badge" style="background:rgba(155,89,182,0.12);color:#a569bd">Essay</span>' : '') +
-      '</div>' +
-      '<div class="opp-award">' + o.award + '</div>' +
-      '<div class="opp-deadline">Deadline: <span>' + o.deadline + '</span></div>' +
-      '<div class="opp-actions">' +
-        '<a href="' + applyHref + '" target="_blank" class="opp-apply-btn">Apply <span>→</span></a>' +
-        '<button class="opp-mark-btn' + (applied ? " marked" : "") + '" data-id="' + o.id + '">' + (applied ? "✓ Applied" : "Mark Applied") + '</button>' +
-      '</div>';
-
-    card.innerHTML = html;
-    grid.appendChild(card);
-  }
-
-  // Bind mark applied buttons
-  var btns = grid.querySelectorAll(".opp-mark-btn");
-  for (var j = 0; j < btns.length; j++) {
-    btns[j].onclick = function() {
-      var id = parseInt(this.getAttribute("data-id"));
-      var now = !getApplied(id);
-      setApplied(id, now);
-      var parentCard = this.closest(".opp-card");
-      if (parentCard) {
-        if (now) {
-          parentCard.classList.add("applied");
-          if (!parentCard.querySelector(".applied-overlay")) {
-            var ov = document.createElement("div");
-            ov.className = "applied-overlay";
-            ov.textContent = "✓ Applied";
-            parentCard.insertBefore(ov, parentCard.firstChild);
-          }
-        } else {
-          parentCard.classList.remove("applied");
-          var ov2 = parentCard.querySelector(".applied-overlay");
-          if (ov2) ov2.remove();
-        }
-        this.textContent = now ? "✓ Applied" : "Mark Applied";
-        if (now) this.classList.add("marked"); else this.classList.remove("marked");
-      }
-      updateStats();
-    };
-  }
-}
-
-function rebuildOpps() {
-  buildOppCards(getFilteredSorted());
-}
-
-// Filter buttons
-document.getElementById("filter-all").onclick = function() {
-  currentFilter = "all";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-all").classList.add("active");
-  rebuildOpps();
-};
-document.getElementById("filter-scholarship").onclick = function() {
-  currentFilter = "scholarship";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-scholarship").classList.add("active");
-  rebuildOpps();
-};
-document.getElementById("filter-federal").onclick = function() {
-  currentFilter = "federal";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-federal").classList.add("active");
-  rebuildOpps();
-};
-document.getElementById("filter-military").onclick = function() {
-  currentFilter = "military";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-military").classList.add("active");
-  rebuildOpps();
-};
-document.getElementById("filter-corporate").onclick = function() {
-  currentFilter = "corporate";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-corporate").classList.add("active");
-  rebuildOpps();
-};
-document.getElementById("filter-state").onclick = function() {
-  currentFilter = "state";
-  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-  document.getElementById("filter-state").classList.add("active");
-  rebuildOpps();
-};
-
-// Search
-document.getElementById("opp-search").oninput = function() {
-  currentSearch = this.value.trim();
-  rebuildOpps();
-};
-
-// Sort
-document.getElementById("opp-sort").onchange = function() {
-  currentSort = this.value;
-  rebuildOpps();
-};
-
-// =====================================================================
-// BUILD ESSAYS
-// =====================================================================
-function buildEssays() {
-  var grid = document.getElementById("essay-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  for (var i = 0; i < ESSAYS.length; i++) {
-    var e = ESSAYS[i];
-    var isReady = e.status === "ready";
-
-    var card = document.createElement("div");
-    card.className = "essay-card" + (isReady ? " ready" : "");
-
-    var pillHTML = isReady
-      ? '<span class="essay-status-pill pill-ready">✅ Ready to Submit</span>'
-      : '<span class="essay-status-pill pill-strategy">📝 Strategy</span>';
-
-    var strategyHTML = "";
-    if (e.strategy) {
-      var items = "";
-      for (var s = 0; s < e.strategy.length; s++) {
-        items += '<li>' + e.strategy[s] + '</li>';
-      }
-      strategyHTML =
-        '<div class="essay-strategy">' +
-          '<div class="essay-strategy-title">Strategy Notes</div>' +
-          '<ul>' + items + '</ul>' +
-        '</div>';
-    }
-
-    var checkHTML = "";
-    if (e.checklist && e.checklist.length) {
-      var citems = "";
-      for (var c = 0; c < e.checklist.length; c++) {
-        citems += '<div class="checklist-item"><span>☐</span><span>' + e.checklist[c] + '</span></div>';
-      }
-      checkHTML = '<div class="essay-checklist"><div class="essay-checklist-title">Checklist</div>' + citems + '</div>';
-    }
-
-    var expandHTML = "";
-    if (isReady && e.paragraphs) {
-      expandHTML = '<button class="essay-expand-btn" id="expand-btn-' + e.id + '">📄 Read Full Essay</button>' +
-        '<div class="essay-full-text" id="essay-text-' + e.id + '"></div>';
-    }
-
-    card.innerHTML =
-      '<div class="essay-card-header">' +
-        '<span class="essay-status-icon">' + e.icon + '</span>' +
-        '<div class="essay-card-title">' +
-          '<div class="essay-card-name">' + e.name + '</div>' +
-          '<div class="essay-card-meta">Deadline: ' + e.deadline + ' | Award: ' + e.award + '</div>' +
-        '</div>' +
-        pillHTML +
-      '</div>' +
-      '<div class="essay-details"><strong>Link:</strong> <a href="' + e.link + '" target="_blank">' + e.link + '</a></div>' +
-      strategyHTML +
-      expandHTML +
-      checkHTML;
-
-    grid.appendChild(card);
-
-    // Build essay text content
-    if (isReady && e.paragraphs) {
-      var textEl = document.getElementById("essay-text-" + e.id);
-      if (textEl) {
-        var pHTML = "";
-        for (var p = 0; p < e.paragraphs.length; p++) {
-          pHTML += "<p>" + e.paragraphs[p] + "</p>";
-        }
-        textEl.innerHTML = pHTML;
-      }
-
-      // Bind expand button
-      (function(eid) {
-        var btn = document.getElementById("expand-btn-" + eid);
-        var txt = document.getElementById("essay-text-" + eid);
-        if (btn && txt) {
-          btn.onclick = function() {
-            var open = txt.classList.toggle("open");
-            btn.textContent = open ? "▲ Close Essay" : "📄 Read Full Essay";
-          };
-        }
-      })(e.id);
-    }
-  }
-}
-
-// =====================================================================
-// BUILD EMAILS
-// =====================================================================
-function buildEmails() {
-  var grid = document.getElementById("email-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  for (var i = 0; i < EMAILS.length; i++) {
-    var em = EMAILS[i];
-    var sent = getSent(em.id);
-    var card = document.createElement("div");
-    card.className = "email-card" + (sent ? " sent-card" : "");
-    card.setAttribute("data-email-id", em.id);
-
-    var noteHTML = em.note ? '<div class="email-note">⚡ ' + em.note + '</div>' : '';
-
-    card.innerHTML =
-      '<div class="email-card-header">' +
-        '<span class="email-icon">' + em.icon + '</span>' +
-        '<div class="email-card-title">' +
-          '<div class="email-card-name">' + em.name + '</div>' +
-          '<div class="email-card-to">To: ' + em.to + '</div>' +
-        '</div>' +
-        (sent ? '<span class="sent-pill">✓ Sent</span>' : '') +
-      '</div>' +
-      '<div class="email-subject">"' + em.subject + '"</div>' +
-      '<div class="email-preview">' + em.preview + '</div>' +
-      noteHTML +
-      '<div class="email-actions">' +
-        '<a href="' + em.link + '" class="email-send-btn">📧 Open Email</a>' +
-        '<button class="email-sent-btn' + (sent ? " marked" : "") + '" data-email-id="' + em.id + '">' + (sent ? "✓ Sent" : "Mark Sent") + '</button>' +
-      '</div>';
-
-    grid.appendChild(card);
-  }
-
-  // Bind mark sent buttons
-  var sentBtns = grid.querySelectorAll(".email-sent-btn");
-  for (var j = 0; j < sentBtns.length; j++) {
-    sentBtns[j].onclick = function() {
-      var eid = this.getAttribute("data-email-id");
-      var now = !getSent(eid);
-      setSent(eid, now);
-      var parentCard = this.closest(".email-card");
-      if (parentCard) {
-        if (now) {
-          parentCard.classList.add("sent-card");
-          var hdr = parentCard.querySelector(".email-card-header");
-          if (hdr && !hdr.querySelector(".sent-pill")) {
-            var pill = document.createElement("span");
-            pill.className = "sent-pill";
-            pill.textContent = "✓ Sent";
-            hdr.appendChild(pill);
-          }
-        } else {
-          parentCard.classList.remove("sent-card");
-          var pill2 = parentCard.querySelector(".sent-pill");
-          if (pill2) pill2.remove();
-        }
-        this.textContent = now ? "✓ Sent" : "Mark Sent";
-        if (now) this.classList.add("marked"); else this.classList.remove("marked");
-      }
-    };
-  }
-}
-
-// =====================================================================
-// BUILD SCHOOLS
-// =====================================================================
-function buildSchools() {
-  var grid = document.getElementById("school-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  for (var i = 0; i < SCHOOLS.length; i++) {
-    var sc = SCHOOLS[i];
-    var card = document.createElement("div");
-    card.className = "school-card";
-
-    card.innerHTML =
-      '<div class="school-card-header">' +
-        '<div>' +
-          '<div class="school-name">' + sc.name + '</div>' +
-          '<div class="school-program">' + sc.program + '</div>' +
-        '</div>' +
-        '<span class="school-status-pill">✅ Accepted</span>' +
-      '</div>' +
-      '<div class="school-details">' +
-        '<div class="school-detail-row"><span class="school-detail-label">Full Name</span><span class="school-detail-val">' + sc.fullName + '</span></div>' +
-        '<div class="school-detail-row"><span class="school-detail-label">Aid Email</span><span class="school-detail-val"><a href="mailto:' + sc.email + '">' + sc.email + '</a></span></div>' +
-        '<div class="school-detail-row"><span class="school-detail-label">Phone</span><span class="school-detail-val">' + sc.phone + '</span></div>' +
-      '</div>' +
-      '<div class="merit-info">🏅 Merit Aid Available: ' + sc.merit + '</div>' +
-      '<div class="school-detail-row" style="margin-bottom:12px"><span class="school-detail-label" style="font-size:0.7rem;color:#7a8ca8">Note:</span><span class="school-detail-val" style="font-size:0.75rem;color:#9aa8bc">' + sc.note + '</span></div>' +
-      '<div class="school-actions">' +
-        '<a href="' + sc.aidLink + '" target="_blank" class="school-aid-btn">💰 Financial Aid Portal</a>' +
-        '<a href="' + sc.engLink + '" target="_blank" class="school-email-btn">🛠️ Engineering Scholarships</a>' +
-      '</div>';
-
-    grid.appendChild(card);
-  }
-}
-
-// =====================================================================
-// MONEY-RANKED DATA (86 scholarships, ranked by award amount)
-// =====================================================================
-var MONEY_RANKED = [
-  {name:"Jack Kent Cooke Transfer Scholarship",amount:"$55,000",arrives:"Nov 2026",opens:"Oct 2026",deadline:"Nov 2026",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://apply.jkcf.org/apply/",notes:"TOP PRIORITY — transfer + financial need + exceptional GPA",amountNum:55000},
-  {name:"Elks Most Valuable Student Award",amount:"$50,000",arrives:"Nov 2026",opens:"Sep 2026",deadline:"Nov 2026",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.elks.org/scholars/scholarships/MVS.cfm",notes:"NEW — one of largest youth scholarships; verify transfer eligibility",amountNum:50000},
-  {name:"College Board Opportunity Scholarships",amount:"$40,000",arrives:"Feb 2027",opens:"Ongoing",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://bigfuture.collegeboard.org/pay-for-college/scholarship-search",notes:"Low effort to apply",amountNum:40000},
-  {name:"Phi Kappa Phi Fellowship (post-transfer)",amount:"$35,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.phikappaphi.org/awards-grants/love-of-learning-award",notes:"Join Phi Kappa Phi in first semester at transfer school (GPA 3.5+ typically qualifies). Th",amountNum:35000},
-  {name:"Dell Scholars Program",amount:"$20,000",arrives:"Nov 2026",opens:"TBD",deadline:"Nov 2026",status:"Check Status",action:"",link:"https://www.dellscholars.org/students/",notes:"$20K + laptop + book credits + emergency funds + coaching. Pell eligible + $55K household ",amountNum:20000},
-  {name:"APIA Scholars Program (formerly APIASF)",amount:"$20,000",arrives:"Jan 2027",opens:"TBD",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://apiascholars.org/scholarship/",notes:"For AAPI students. Does not apply to Emilio based on profile (Latino + Black). Include for",amountNum:20000},
-  {name:"American Legion Legacy Scholarship",amount:"$20,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.legion.org/get-involved/scholarships/the-american-legion-legacy-scholarship",notes:"Needs-based gap scholarship up to $20K. Verify if Emilio's parent has 50%+ VA disability r",amountNum:20000},
-  {name:"American Indian College Fund (Transfer)",amount:"$20,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://collegefund.org/students/scholarships/",notes:"If Emilio has any Native American heritage beyond Latino+Black, this is a strong option. V",amountNum:20000},
-  {name:"NASA Minority University Research and Education Project (MUREP)",amount:"$16,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.nasa.gov/learning-opportunities/",notes:"MUREP internship stipend + potential scholarship tie-in. Not purely scholarship but NASA-p",amountNum:16000},
-  {name:"AIAA Foundation Undergraduate Scholarship (Full Suite)",amount:"$15,000",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.aiaa-awards.org/a",notes:"NEW — full AIAA suite beyond the basic entry — join AIAA student chapter now",amountNum:15000},
-  {name:"ASME Scholarship (2+2 Transfer Program)",amount:"$15,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.asme.org/asme-programs/students-and-faculty/scholarships/4-year-baccalaureate-graduate-students",notes:"Explicitly includes 2+2 Transfer Program track. Must join ASME student chapter (~$25 membe",amountNum:15000},
-  {name:"Society of Women Engineers (SWE) Scholarship",amount:"$15,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://swe.org/scholarships/",notes:"SWE offers 330+ scholarships annually. If Emilio identifies as a woman or gender minority,",amountNum:15000},
-  {name:"Great Minds in STEM (GMiS) Scholarship",amount:"$10,000",arrives:"Jun 2026",opens:"Mar 2026",deadline:"Jun 2026",status:"Check Status",action:"",link:"https://greatmindsinstem.org/gmis-scholarship-application/gmis-scholarships/",notes:"2026-27 cycle opens Mar 2027 — mark calendar",amountNum:10000},
-  {name:"Scholarships360 $10K No Essay",amount:"$10,000",arrives:"Jun 2026",opens:"Ongoing",deadline:"Jun 2026",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://scholarships360.org/scholarships/search/10000-no-essay-scholarship/",notes:"NEW — low effort no essay — deadline Jun 2026",amountNum:10000},
-  {name:"Soroptimist Live Your Dream Award",amount:"$10,000",arrives:"Nov 2026",opens:"TBD",deadline:"Nov 2026",status:"Check Status",action:"",link:"https://www.soroptimist.org/our-work/live-your-dream-awards.html",notes:"Traditionally women-focused but check current eligibility. If Emilio supports household or",amountNum:10000},
-  {name:"Zonta International Amelia Earhart Fellowship",amount:"$10,000",arrives:"Nov 2026",opens:"TBD",deadline:"Nov 2026",status:"Check Status",action:"",link:"https://www.zonta.org/Global-Impact/Education/Amelia-Earhart-Fellowship",notes:"Graduate-level only. Plan for this during senior year at transfer school as a future targe",amountNum:10000},
-  {name:"Tau Beta Pi Engineering Scholarship",amount:"$10,000",arrives:"Jan 2027",opens:"Sep 2026",deadline:"Jan 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.tbp.org/scholarships.cfm",notes:"Check eligibility after transfer enrollment",amountNum:10000},
-  {name:"Lockheed Martin STEM Scholarship",amount:"$10,000",arrives:"Jan 2027",opens:"Oct 2026",deadline:"Jan 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.lockheedmartin.com/en-us/who-we-are/communities/stem-education.html",notes:"NEW — aerospace industry giant + $10K + direct career pipeline",amountNum:10000},
-  {name:"EAA Aviation Center Scholarship (Ray Foundation)",amount:"$10,000",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.eaa.org/youth",notes:"NEW — aviation/aerospace specific + $10K",amountNum:10000},
-  {name:"UNCF Scholarships",amount:"$10,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",notes:"Multiple scholarships — apply to several",amountNum:10000},
-  {name:"Northrop Grumman Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.northropgrumman.com/careers/",notes:"NEW — aerospace/defense corp scholarship + diversity focus",amountNum:10000},
-  {name:"Raytheon STEM Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.rtx.com/our-company/citizenship-and-sustainability",notes:"NEW — defense/aerospace corp + diversity recruitment",amountNum:10000},
-  {name:"Society of Automotive Engineers (SAE) Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Feb 2027",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.sae.org/scholarships",notes:"Opens Feb 2027 — mark calendar; aerospace + engineering fit",amountNum:10000},
-  {name:"Google Generation Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship",notes:"NEW — Google + minority engineering + $10K",amountNum:10000},
-  {name:"National Space Club Goddard Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.spaceclub.org/scholarship/",notes:"NEW — $10K space-specific scholarship — direct NASA pipeline fit",amountNum:10000},
-  {name:"L3Harris Technologies Scholarship",amount:"$10,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.l3harris.com/careers/students-and-new-grads",notes:"NEW — aerospace defense corp + diversity recruitment",amountNum:10000},
-  {name:"Virginia Space Grant Consortium Scholarship",amount:"$8,500",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://vsgc.odu.edu/",notes:"NEW — if Elijah attends Virginia Tech this is a strong add-on",amountNum:8500},
-  {name:"NC Space Grant Consortium",amount:"$8,500",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://spacegrant.net/apps/?pk=ncs1",notes:"NEW — NC RESIDENT + aerospace = direct state NASA grant pipeline — HIGH PRIORITY",amountNum:8500},
-  {name:"National Space Grant College and Fellowship Program (NC Space Grant)",amount:"$8,500",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://ncspacegrant.org/students/",notes:"CRITICAL: NC resident + aerospace + NASA pipeline. Different from generic NASA internship.",amountNum:8500},
-  {name:"NASA Space Grant (Virginia track)",amount:"$8,500",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://vsgc.odu.edu/",notes:"High value if Emilio attends Virginia Tech. Apply through VSGC after enrollment.",amountNum:8500},
-  {name:"Georgia Tech Transfer Merit Scholarship",amount:"$8,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://finaid.gatech.edu/",notes:"Waiting on admission — GT aerospace is top-tier",amountNum:8000},
-  {name:"University of Colorado Boulder Transfer Merit Aid",amount:"$8,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.colorado.edu/financialaid/",notes:"ACCEPTED — apply for merit aid immediately",amountNum:8000},
-  {name:"Tuskegee Airmen Scholarship Foundation",amount:"$6,000",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://tuskegeeairmen.org/youth/tuskegee-airmen-scholarship-foundation/",notes:"NEW — aerospace-specific + minority legacy org",amountNum:6000},
-  {name:"Purdue University Minority Engineering Scholarship",amount:"$6,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://engineering.purdue.edu/Engr/AboutUs/DiversityInitiatives",notes:"Waiting on admission decision",amountNum:6000},
-  {name:"Hispanic Heritage Foundation Youth Awards",amount:"$5,000",arrives:"Oct 2026",opens:"Aug 2026",deadline:"Oct 2026",status:"Check Status",action:"",link:"https://www.hispanicheritage.org/programs/",notes:"Latino + STEM + leadership strong fit",amountNum:5000},
-  {name:"Pearson Scholarship (via PTK)",amount:"$5,000",arrives:"Dec 2026",opens:"TBD",deadline:"Dec 2026",status:"Check Status",action:"",link:"https://www.ptk.org/scholarships/",notes:"NEW: Pearson sponsors PTK scholarships specifically for CC students transitioning to 4-yea",amountNum:5000},
-  {name:"American Institute of Aeronautics and Astronautics",amount:"$5,000",arrives:"Jan 2027",opens:"Jan 2027",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.aiaa-awards.org/a",notes:"Direct aerospace fit — high priority",amountNum:5000},
-  {name:"PTK All-USA Academic Team",amount:"$5,000",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.ptk.org/scholarships/",notes:"Already PTK — strong profile fit",amountNum:5000},
-  {name:"National Society of Black Engineers",amount:"$5,000",arrives:"Jan 2027",opens:"Sep 2026",deadline:"Jan 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://nsbe.org/scholarships/",notes:"Direct STEM+Black fit",amountNum:5000},
-  {name:"AIAA Orville & Wilbur Wright Graduate Award",amount:"$5,000",arrives:"Jan 2027",opens:"Jan 2027",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.aiaa-awards.org/a",notes:"NEW — plan for faculty nomination at transfer school",amountNum:5000},
-  {name:"BEYA STEM Conference Scholarship",amount:"$5,000",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.beya.org/",notes:"NEW — Black Engineers of the Year — STEM + Black student fit",amountNum:5000},
-  {name:"Hispanic Scholarship Fund",amount:"$5,000",arrives:"Feb 2027",opens:"Aug 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.hsf.net/scholarship",notes:"Strong fit — Latino + financial need + STEM",amountNum:5000},
-  {name:"Virginia Tech Transfer Merit Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://sfs.vt.edu/scholarships.html",notes:"ACCEPTED — apply for merit aid immediately",amountNum:5000},
-  {name:"Ohio State Transfer Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://sfa.osu.edu/",notes:"ACCEPTED — apply for merit aid immediately",amountNum:5000},
-  {name:"UNCF/Koch Scholars Program",amount:"$5,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",notes:"NEW — Black student STEM scholarship + renewable",amountNum:5000},
-  {name:"UNCF STEM Scholars Program (Fund II Foundation)",amount:"$5,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",notes:"NEW — Black + STEM + financial need = direct fit",amountNum:5000},
-  {name:"Microsoft Scholarship Program",amount:"$5,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://careers.microsoft.com/students",notes:"NEW — tech giant minority STEM scholarship",amountNum:5000},
-  {name:"National Hispanic Media Coalition Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.nhmc.org/",notes:"NEW — Latino STEM/tech focus",amountNum:5000},
-  {name:"Collins Aerospace Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.collinsaerospace.com/careers/students-and-recent-graduates",notes:"NEW — Collins = major aerospace corp + diverse hiring push",amountNum:5000},
-  {name:"Pratt & Whitney Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"Oct 2026",deadline:"Feb 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://careers.rtx.com/global/en/pratt-whitney",notes:"NEW — propulsion focus aligns with aerospace/NASA work",amountNum:5000},
-  {name:"Colorado Space Grant Consortium",amount:"$5,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://spacegrant.colorado.edu/",notes:"NEW — if attending CU Boulder this unlocks NASA SGSC pipeline",amountNum:5000},
-  {name:"NASA Space Grant Consortium (CU Boulder track)",amount:"$5,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://spacegrant.colorado.edu/",notes:"Opens after enrollment at CU Boulder. Activates NASA pipeline funding for undergrads. Appl",amountNum:5000},
-  {name:"Navy League Foundation Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.navyleague.org/what-we-do/our-programs/scholarship-program/",notes:"Specifically Navy/Marine/Coast Guard family. If military parent served in one of these bra",amountNum:5000},
-  {name:"International Gas Turbine Institute (ASME IGTI) Student Award",amount:"$5,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.asme.org/asme-programs/students-and-faculty/scholarships/",notes:"Propulsion-focused engineering award — directly aligned with aerospace/NASA career track.",amountNum:5000},
-  {name:"Vertical Flight Foundation Scholarship",amount:"$5,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.vtol.org/education/vertical-flight-foundation-scholarship",notes:"VTOL/rotorcraft engineering scholarship — NASA relevance (Mars helicopter, etc.). Niche = ",amountNum:5000},
-  {name:"AMVETS Scholarship (Child/Grandchild)",amount:"$4,000",arrives:"Jan 2027",opens:"Oct 2026",deadline:"Jan 2027",status:"Opens Soon",action:"🟡 Opens Soon - Prep Now",link:"https://www.amvets.org/scholarships/",notes:"NEW — military family dependent + $4K + AMVETS established org",amountNum:4000},
-  {name:"Iowa State University Transfer Scholarship",amount:"$4,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.financialaid.iastate.edu/types-of-aid/scholarships/",notes:"ACCEPTED — apply for merit aid immediately",amountNum:4000},
-  {name:"Engineers Foundation of Ohio Scholarship",amount:"$3,500",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.efostem.org/",notes:"NEW — if Elijah attends Ohio State this applies",amountNum:3500},
-  {name:"NC Community College Transfer Grant",amount:"$3,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.cfnc.org/pay-for-college/grants-and-scholarships/",notes:"Direct fit — NC CC transfer with financial need",amountNum:3000},
-  {name:"Maryland Transfer Merit Scholarship",amount:"$3,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://financialaid.umd.edu/",notes:"ACCEPTED — apply for merit aid immediately",amountNum:3000},
-  {name:"Omega Psi Phi George E. Meares Scholarship",amount:"$3,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.omegapsiphifraternity.org/",notes:"NEW — Black male aerospace student — worth applying",amountNum:3000},
-  {name:"American Meteorological Society Minority Scholarship",amount:"$3,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.ametsoc.org/ams/index.cfm/information-for/students/ams-scholarships-and-fellowships/",notes:"NEW — aerospace-adjacent + minority + financial need",amountNum:3000},
-  {name:"P.E.O. Program for Continuing Education (PCE)",amount:"$3,000",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.peointernational.org/peo-programs/program-for-continuing-education/",notes:"Women-focused returning student grant. If Emilio does not identify as a woman, this does n",amountNum:3000},
-  {name:"Coca-Cola Academic Team Scholarship",amount:"$2,500",arrives:"Nov 2026",opens:"TBD",deadline:"Nov 2026",status:"Check Status",action:"",link:"https://www.ptk.org/scholarships/coca-cola-academic-team-scholarship/",notes:"Up to 1,300 awards — high volume. Emilio is PTK & meets GPA. Must be nominated by college.",amountNum:2500},
-  {name:"Hero's Legacy Scholarship (Fisher House)",amount:"$2,500",arrives:"Jan 2027",opens:"Nov 2026",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.fisherhouse.org/programs/",notes:"NEW — Fisher House military children scholarship",amountNum:2500},
-  {name:"American Helicopter Society Robert L. Lichten Award",amount:"$2,500",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.vtol.org/education/lichten-award",notes:"Academic achievement award for rotary-wing engineering paper. Emilio can write one with fa",amountNum:2500},
-  {name:"Scholarships for Military Children",amount:"$2,000",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.fisherhouse.org/programs/scholarship-programs/scholarships-for-military-children/",notes:"Military family benefit — straightforward apply",amountNum:2000},
-  {name:"Alpha Phi Alpha Educational Foundation Scholarship",amount:"$2,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.alphaphialpha.net/foundation/",notes:"NEW — Black male merit scholarship",amountNum:2000},
-  {name:"Scholarships360 Making the Leap (Transfer)",amount:"$1,000",arrives:"Jan 2027",opens:"Ongoing",deadline:"Jan 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://scholarships360.org/scholarships/search/making-the-leap-scholarship-for-transfer-students/",notes:"NEW — low effort transfer scholarship",amountNum:1000},
-  {name:"Imagine America Foundation",amount:"$1,000",arrives:"Feb 2027",opens:"Ongoing",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.imagine-america.org/students/",notes:"Low effort — community college transfer",amountNum:1000},
-  {name:"David Alan Quick Scholarship (AIAA)",amount:"$1,000",arrives:"Feb 2027",opens:"Jan 2027",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.aiaa-awards.org/a",notes:"NEW — small but low-competition aerospace specific",amountNum:1000},
-  {name:"Zeta Phi Beta General Scholarship",amount:"$1,000",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.zphib1920.org/nef/",notes:"NEW — low barrier,  community service focus",amountNum:1000},
-  {name:"QuestBridge National College Match",amount:"$4",arrives:"Sep 2026",opens:"Mar 2026",deadline:"Sep 2026",status:"Check Status",action:"",link:"https://www.questbridge.org/",notes:"Check transfer eligibility — often for incoming freshmen",amountNum:4},
-  {name:"Gates Scholarship (formerly Gates Millennium)",amount:"$0",arrives:"Sep 2026",opens:"TBD",deadline:"Sep 2026",status:"Check Status",action:"",link:"https://www.thegatesscholarship.org/",notes:"Gates Scholarship traditionally for incoming freshmen. Verify if transfer-from-CC counts a",amountNum:0},
-  {name:"National GEM Consortium Fellowship",amount:"$0",arrives:"Nov 2026",opens:"Ongoing",deadline:"Nov 2026",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.gemfellowship.org/",notes:"NEW — massive fellowship for minority STEM grad pipeline — plan now for post-transfer",amountNum:0},
-  {name:"VA Fry Scholarship (Marine Gunnery Sergeant John David Fry)",amount:"$0",arrives:"Feb 2027",opens:"Ongoing",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.va.gov/education/survivor-dependent-education-assistance/",notes:"NEW — verify Chapter 35 vs Fry eligibility with VA — may stack benefits",amountNum:0},
-  {name:"Golden Door Scholars",amount:"$0",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://goldendoorscholars.org/",notes:"For children of immigrants with strong need. Latino + Black + military family immigrant ba",amountNum:0},
-  {name:"SciTech Forum AIAA Student Paper Competition",amount:"$0",arrives:"Jan 2027",opens:"TBD",deadline:"Jan 2027",status:"Check Status",action:"",link:"https://www.aiaa.org/get-involved/students-young-professionals",notes:"Not a traditional scholarship but a competition that can pay for conference + adds to NASA",amountNum:0},
-  {name:"Frederick Douglass Bicentennial Scholarship (UNCF)",amount:"$0",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://opportunities.uncf.org/s/pre-login-welcome-page",notes:"NEW — UNCF specific program worth applying to",amountNum:0},
-  {name:"National Scholarship Providers Association",amount:"$0",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.scholarshipproviders.org/",notes:"NEW — clearinghouse for multiple scholarships",amountNum:0},
-  {name:"Dr. Juan Andrade Jr. Scholarship for Young Hispanic Leaders",amount:"$0",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://www.ushli.org/dr-juan-andrade-jr-scholarship-for-young-hispanic-leaders/",notes:"NEW — Latino heritage + PTK/Dean's List leadership = strong fit",amountNum:0},
-  {name:"TMCF Gap Completion Grant",amount:"$0",arrives:"Feb 2027",opens:"Rolling",deadline:"Feb 2027",status:"Open Now",action:"🔴 APPLY THIS WEEK",link:"https://tmcf.org/scholarships/open-scholarships/",notes:"NEW — emergency/gap funding — rolling deadline",amountNum:0},
-  {name:"Daughters of the American Revolution STEM Scholarship",amount:"$0",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.dar.org/national-society/scholarships",notes:"NEW — military family + STEM = enhanced fit; contact NC DAR chapter",amountNum:0},
-  {name:"DAR American Indian Scholarship (open to military family)",amount:"$0",arrives:"Feb 2027",opens:"Nov 2026",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.dar.org/national-society/scholarships",notes:"NEW — check specific eligibility; military family + need = possible fit",amountNum:0},
-  {name:"PTK Pearson Scholarship for Higher Education",amount:"$0",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.ptk.org/scholarships/",notes:"Targeted for PTK members transitioning from CC to 4-year. Check current cycle at ptk.org —",amountNum:0},
-  {name:"Jose Marti Scholarship Challenge Grant",amount:"$0",arrives:"Feb 2027",opens:"TBD",deadline:"Feb 2027",status:"Check Status",action:"",link:"https://www.floridastudentfinancialaidsg.org/SAPHome/SAPHome?url=home",notes:"Florida-only. Does NOT apply to NC resident Emilio unless he enrolls at a Florida school. ",amountNum:0},
-];
-
-// =====================================================================
-// BUILD MONEY-RANKED VIEW
-// =====================================================================
-function buildMoneyRanked() {
-  var container = document.getElementById("money-table-body");
-  if (!container) return;
-  container.innerHTML = "";
-  var applyThisWeek = MONEY_RANKED.filter(function(s) { return s.action && s.action.indexOf("APPLY THIS WEEK") >= 0; });
-  var opensSoon = MONEY_RANKED.filter(function(s) { return s.action && s.action.indexOf("Opens Soon") >= 0; });
-
-  // Update top counter banner
-  var totalEl = document.getElementById("money-total-count");
-  var applyEl = document.getElementById("money-apply-count");
-  var opensEl = document.getElementById("money-opens-count");
-  if (totalEl) totalEl.textContent = MONEY_RANKED.length;
-  if (applyEl) applyEl.textContent = applyThisWeek.length;
-  if (opensEl) opensEl.textContent = opensSoon.length;
-
-  var statsEl = document.getElementById("money-stats");
-  if (statsEl) {
-    var totalPot = MONEY_RANKED.reduce(function(sum, s) { return sum + s.amountNum; }, 0);
-    statsEl.innerHTML =
-      '<div class="stat-item"><span class="stat-num">' + MONEY_RANKED.length + '</span><span class="stat-label">Total Listed</span></div>' +
-      '<div class="stat-item"><span class="stat-num">' + applyThisWeek.length + '</span><span class="stat-label">Apply This Week</span></div>' +
-      '<div class="stat-item"><span class="stat-num">' + opensSoon.length + '</span><span class="stat-label">Opens Soon</span></div>' +
-      '<div class="stat-item"><span class="stat-num">$1.2M+</span><span class="stat-label">Total Potential</span></div>' +
-      '<div class="stat-item"><span class="stat-num">$55K</span><span class="stat-label">Highest Award</span></div>';
-  }
-  for (var i = 0; i < MONEY_RANKED.length; i++) {
-    var s = MONEY_RANKED[i];
-    var actionColor = s.action && s.action.indexOf("APPLY THIS WEEK") >= 0 ? "#e74c3c" :
-                      s.action && s.action.indexOf("Opens Soon") >= 0 ? "#f5a623" : "#7a8ca8";
-    var amtColor = s.amountNum >= 20000 ? "#f5a623" :
-                   s.amountNum >= 10000 ? "#00b4d8" :
-                   s.amountNum >= 5000  ? "#2ecc71" : "#9aa8bc";
-    var row = document.createElement("div");
-    row.className = "money-row";
-    row.innerHTML =
-      '<div class="money-rank">' + (i+1) + '</div>' +
-      '<div class="money-main">' +
-        '<div class="money-name"><a href="' + s.link + '" target="_blank">' + s.name + '</a></div>' +
-        '<div class="money-meta">' +
-          '<span class="money-deadline">📅 ' + s.deadline + '</span>' +
-          (s.notes ? '<span class="money-note">' + s.notes.substring(0,80) + (s.notes.length>80?'…':'') + '</span>' : '') +
-        '</div>' +
-      '</div>' +
-      '<div class="money-right">' +
-        '<div class="money-amount" style="color:' + amtColor + '">' + s.amount + '</div>' +
-        '<div class="money-action" style="color:' + actionColor + '">' + (s.action || s.status) + '</div>' +
-      '</div>';
-    container.appendChild(row);
-  }
-}
-
-// =====================================================================
-// BUILD COUNTDOWNS
-// =====================================================================
-buildCountdown(new Date("2026-09-01T23:59:00"), "timer-gates");
-buildCountdown(new Date("2026-11-01T23:59:00"), "timer-jkc");
-buildCountdown(new Date("2027-01-31T23:59:00"), "timer-ronbrown");
-
-// =====================================================================
-// INIT ALL SECTIONS
-// =====================================================================
-buildPipeline();
-rebuildOpps();
-buildEssays();
-buildEmails();
-buildSchools();
-buildMoneyRanked();
-
-// =====================================================================
-// STATS - CALCULATED LAST, AFTER ALL DOM IS BUILT
-// =====================================================================
-function updateStats() {
-  var totalApplied = 0;
-  for (var i = 0; i < DB.length; i++) {
-    if (getApplied(DB[i].id)) totalApplied++;
-  }
-  var totalSent = 0;
-  for (var j = 0; j < EMAILS.length; j++) {
-    if (getSent(EMAILS[j].id)) totalSent++;
-  }
-  var topScore = DB.length > 0 ? DB[0].score : 0;
-  var totalPotential = 0;
-  for (var k = 0; k < DB.length; k++) {
-    totalPotential += DB[k].awardNum;
-  }
-  var totalPotentialStr = "$" + Math.round(totalPotential / 1000) + "K+";
-
-  var bar = document.getElementById("stats-bar");
-  if (!bar) return;
-  bar.innerHTML =
-    '<div class="stat-item"><span class="stat-num">' + DB.length + '</span><span class="stat-label">Opportunities</span></div>' +
-    '<div class="stat-item"><span class="stat-num">' + totalApplied + '</span><span class="stat-label">Applied</span></div>' +
-    '<div class="stat-item"><span class="stat-num">' + totalSent + '</span><span class="stat-label">Emails Sent</span></div>' +
-    '<div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Acceptances</span></div>' +
-    '<div class="stat-item"><span class="stat-num">' + topScore + '</span><span class="stat-label">Top Score</span></div>' +
-    '<div class="stat-item"><span class="stat-num">3.52</span><span class="stat-label">GPA</span></div>' +
-    '<div class="stat-item"><span class="stat-num">60+</span><span class="stat-label">Credits</span></div>';
-}
-
-updateStats();
-
-// =====================================================================
-// MASTER OPPORTUNITIES — ALL 110 HARDCODED (no fetch dependency)
-// =====================================================================
-var MASTER_OPPS = [
-  {name:'Pat Tillman Foundation Scholarship',type:'Grant/Internship',award:'Up to $10000-$11000/year',deadline:'October 2025',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://pattillmanfoundation.org/apply/',notes:'For active-duty veterans and their spouses attending college. NOTE: Check if children of active-duty/veterans qualify (criteria has shifted). If Emilio has served himself or parent',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'AIAA Foundation Undergraduate Scholarship',type:'Grant/Internship',award:'$2000-$10000 (multiple awards at different levels)',deadline:'January 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY - awards pay Fall 2026',link:'https://www.aiaa.org/get-involved/students-young-professionals/scholarships',notes:'American Institute of Aeronautics and Astronautics. Must be AIAA member. Several tiers: freshman sophomore junior senior. Emilio should join AIAA now and apply January 2027 for 202',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'Lockheed Martin STEM Scholarship (via HSF/SHPE/NSBE)',type:'Grant/Internship',award:'$5000-$10000',deadline:'February 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY - awards pay Fall 2026',link:'https://www.lockheedmartin.com/en-us/who-we-are/communities/stem-education/lm-scholarships.html',notes:'Applied through HSF SHPE or NSBE partner portals. Aerospace/engineering major required. Underrepresented minority students prioritized. Lockheed Martin also offers direct internshi',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'RTX (Raytheon Technologies) STEM Scholarship',type:'Grant/Internship',award:'$5000-$10000',deadline:'February 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://www.rtx.com/raytheon/who-we-are/our-mission/stem-community-engagement',notes:'Raytheon parent company RTX funds scholarships for STEM students. Administered through SHPE NSBE and SHPEtinas. Strong defense/aerospace engineering alignment. Military family back',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'Thurgood Marshall College Fund (TMCF) Scholarship',type:'Grant/Internship',award:'$3200-$10000',deadline:'March 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY - awards pay Fall 2026',link:'https://tmcf.org/students/scholarships/',notes:'For students at HBCUs and other institutions. STEM priority scholarships available. Also manages corporate partner scholarships (AT&T Walmart etc). Create TMCF profile for all mana',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'NSBE Foundation Scholarship (National Society of Black Engineers)',type:'Grant/Internship',award:'$500-$7500 (varies by award tier)',deadline:'March 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://www.nsbe.org/programs/scholarships/',notes:'Multiple awards within NSBE Foundation. NSBE membership required. Aerospace/engineering students competitive. Also check NSBE corporate sponsors (Boeing Northrop LM Raytheon run pa',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'HACU National Internship Program (HNIP)',type:'Grant/Internship',award:'$5100-$7100 stipend (10-week federal agency placement)',deadline:'February 2026',fund_arrival:'June-August 2026 (summer session)',status:'❌ CLOSED for Summer 2026; apply for Summer 2027',link:'https://www.hacu.net/hacu/HNIP.asp',notes:'Places Hispanic students at federal agencies including NASA DOD DOE. Strong aerospace fit. Competitive. Future reference: apply January-February 2027 for Summer 2027. Students work',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'Hispanic Scholarship Fund (HSF)',type:'Grant/Internship',award:'$500-$5000 (based on need and merit)',deadline:'February 2026',fund_arrival:'August 2026 (paid to student or school)',status:'❌ CLOSED for 2026-27 AY - awards disbursed Aug 2026',link:'https://www.hsf.net/scholarships',notes:'Largest Hispanic scholarship organization in US. Awards still disburse in August 2026 for those who applied in Feb. Note for next year: deadline is early February. Pell-eligible ap',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'UNCF/Koch Scholars Program',type:'Grant/Internship',award:'$5000/year',deadline:'March 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for Fall 2026 cycle',link:'https://www.uncf.org/programs/uncf-koch-scholars-program',notes:'For Black students in economics or STEM at any accredited school. UNCF manages; Koch Industries funds. Annual program. Awards disburse Fall 2026 to those already selected. Check UN',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'Congressional Hispanic Caucus Institute (CHCI) Scholarship',type:'Grant/Internship',award:'$1000-$5000',deadline:'January 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://chci.org/scholarships/',notes:'For Latino students demonstrating academic excellence and community leadership. Also offers paid congressional internships ($3000/session). Emilio\'s profile (military family + STEM',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'AFCEA Ralph W. Shrader Diversity Scholarships',type:'Grant/Internship',award:'$3000 undergrad / $4000 graduate',deadline:'March 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://www.afcea.org/scholarships',notes:'Armed Forces Communications & Electronics Association. For students in STEM fields with ties to military/national security missions. Military family background is strong asset. Als',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'National Military Family Association (NMFA) Scholarship',type:'Grant/Internship',award:'$2500 per award',deadline:'February 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY',link:'https://www.militaryfamily.org/project/scholarships-degree-funding/',notes:'For children of active-duty veterans Guard/Reserve members. Emilio qualifies based on military family status. Award funds educational expenses. Disbursed for fall semester. Apply F',tier:'🔴 APPLY THIS WEEK',days:0},
-  {name:'SHPE Foundation Scholarship',type:'Grant/Internship',award:'$1000-$10000 (multiple tiers)',deadline:'April 2026',fund_arrival:'August 2026 (fall disbursement to school)',status:'⚠️ POSSIBLY STILL OPEN - check SHPE portal immediately',link:'https://shpe.org/scholarships/',notes:'Society of Hispanic Professional Engineers annual scholarship. SHPE membership required (typically ~$35 student rate). Aerospace/engineering priority. Deadline often falls in April',tier:'🔴 APPLY THIS WEEK',days:2},
-  {name:'Great Minds in STEM (GMiS) Scholarship',type:'Scholarship',award:'$10,000',deadline:'Jun 2026',fund_arrival:'Jun 2026',status:'Check Status',link:'https://greatmindsinstem.org/gmis-scholarship-application/gmis-scholarships/',notes:'2026-27 cycle opens Mar 2027 — mark calendar',tier:'🟢 APPLY NEXT MONTH',days:63},
-  {name:'Scholarships360 $10K No Essay',type:'Scholarship',award:'$10,000',deadline:'Jun 2026',fund_arrival:'Jun 2026',status:'Open Now',link:'https://scholarships360.org/scholarships/search/10000-no-essay-scholarship/',notes:'NEW — low effort no essay — deadline Jun 2026',tier:'🟢 APPLY NEXT MONTH',days:63},
-  {name:'QuestBridge National College Match',type:'Scholarship',award:'$4',deadline:'Sep 2026',fund_arrival:'Sep 2026',status:'Check Status',link:'https://www.questbridge.org/',notes:'Check transfer eligibility — often for incoming freshmen',tier:'🟢 APPLY NEXT MONTH',days:155},
-  {name:'Gates Scholarship (formerly Gates Millennium)',type:'Scholarship',award:'$0',deadline:'Sep 2026',fund_arrival:'Sep 2026',status:'Check Status',link:'https://www.thegatesscholarship.org/',notes:'Gates Scholarship traditionally for incoming freshmen. Verify if transfer-from-CC counts as new enro',tier:'🟢 APPLY NEXT MONTH',days:155},
-  {name:'Hispanic Heritage Foundation Youth Awards',type:'Scholarship',award:'$5,000',deadline:'Oct 2026',fund_arrival:'Oct 2026',status:'Check Status',link:'https://www.hispanicheritage.org/programs/',notes:'Latino + STEM + leadership strong fit',tier:'🟢 APPLY NEXT MONTH',days:186},
-  {name:'Jack Kent Cooke Transfer Scholarship',type:'Scholarship',award:'$55,000',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Opens Soon',link:'https://apply.jkcf.org/apply/',notes:'TOP PRIORITY — transfer + financial need + exceptional GPA',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Elks Most Valuable Student Award',type:'Scholarship',award:'$50,000',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Opens Soon',link:'https://www.elks.org/scholars/scholarships/MVS.cfm',notes:'NEW — one of largest youth scholarships; verify transfer eligibility',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Dell Scholars Program',type:'Scholarship',award:'$20,000',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Check Status',link:'https://www.dellscholars.org/students/',notes:'$20K + laptop + book credits + emergency funds + coaching. Pell eligible + $55K household = strong f',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Soroptimist Live Your Dream Award',type:'Scholarship',award:'$10,000',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Check Status',link:'https://www.soroptimist.org/our-work/live-your-dream-awards.html',notes:'Traditionally women-focused but check current eligibility. If Emilio supports household or family, f',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Zonta International Amelia Earhart Fellowship',type:'Scholarship',award:'$10,000',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Check Status',link:'https://www.zonta.org/Global-Impact/Education/Amelia-Earhart-Fellowship',notes:'Graduate-level only. Plan for this during senior year at transfer school as a future target. Note fo',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Coca-Cola Academic Team Scholarship',type:'Scholarship',award:'$2,500',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Check Status',link:'https://www.ptk.org/scholarships/coca-cola-academic-team-scholarship/',notes:'Up to 1,300 awards — high volume. Emilio is PTK & meets GPA. Must be nominated by college. Deadline ',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'National GEM Consortium Fellowship',type:'Scholarship',award:'$0',deadline:'Nov 2026',fund_arrival:'Nov 2026',status:'Open Now',link:'https://www.gemfellowship.org/',notes:'NEW — massive fellowship for minority STEM grad pipeline — plan now for post-transfer',tier:'🟢 APPLY NEXT MONTH',days:216},
-  {name:'Pearson Scholarship (via PTK)',type:'Scholarship',award:'$5,000',deadline:'Dec 2026',fund_arrival:'Dec 2026',status:'Check Status',link:'https://www.ptk.org/scholarships/',notes:'NEW: Pearson sponsors PTK scholarships specifically for CC students transitioning to 4-year. Separat',tier:'🟢 APPLY NEXT MONTH',days:247},
-  {name:'APIA Scholars Program (formerly APIASF)',type:'Scholarship',award:'$20,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://apiascholars.org/scholarship/',notes:'For AAPI students. Does not apply to Emilio based on profile (Latino + Black). Include for completen',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'AIAA Foundation Undergraduate Scholarship (Full Suite)',type:'Scholarship',award:'$15,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.aiaa-awards.org/a',notes:'NEW — full AIAA suite beyond the basic entry — join AIAA student chapter now',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Tau Beta Pi Engineering Scholarship',type:'Scholarship',award:'$10,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Opens Soon',link:'https://www.tbp.org/scholarships.cfm',notes:'Check eligibility after transfer enrollment',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Lockheed Martin STEM Scholarship',type:'Scholarship',award:'$10,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Opens Soon',link:'https://www.lockheedmartin.com/en-us/who-we-are/communities/stem-education.html',notes:'NEW — aerospace industry giant + $10K + direct career pipeline',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'EAA Aviation Center Scholarship (Ray Foundation)',type:'Scholarship',award:'$10,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.eaa.org/youth',notes:'NEW — aviation/aerospace specific + $10K',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Tuskegee Airmen Scholarship Foundation',type:'Scholarship',award:'$6,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://tuskegeeairmen.org/youth/tuskegee-airmen-scholarship-foundation/',notes:'NEW — aerospace-specific + minority legacy org',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'American Institute of Aeronautics and Astronautics',type:'Scholarship',award:'$5,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.aiaa-awards.org/a',notes:'Direct aerospace fit — high priority',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'PTK All-USA Academic Team',type:'Scholarship',award:'$5,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.ptk.org/scholarships/',notes:'Already PTK — strong profile fit',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'National Society of Black Engineers',type:'Scholarship',award:'$5,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Opens Soon',link:'https://nsbe.org/scholarships/',notes:'Direct STEM+Black fit',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'AIAA Orville & Wilbur Wright Graduate Award',type:'Scholarship',award:'$5,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.aiaa-awards.org/a',notes:'NEW — plan for faculty nomination at transfer school',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'BEYA STEM Conference Scholarship',type:'Scholarship',award:'$5,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.beya.org/',notes:'NEW — Black Engineers of the Year — STEM + Black student fit',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'AMVETS Scholarship (Child/Grandchild)',type:'Scholarship',award:'$4,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Opens Soon',link:'https://www.amvets.org/scholarships/',notes:'NEW — military family dependent + $4K + AMVETS established org',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Engineers Foundation of Ohio Scholarship',type:'Scholarship',award:'$3,500',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.efostem.org/',notes:'NEW — if Elijah attends Ohio State this applies',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Hero\'s Legacy Scholarship (Fisher House)',type:'Scholarship',award:'$2,500',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.fisherhouse.org/programs/',notes:'NEW — Fisher House military children scholarship',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'Scholarships360 Making the Leap (Transfer)',type:'Scholarship',award:'$1,000',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Open Now',link:'https://scholarships360.org/scholarships/search/making-the-leap-scholarship-for-transfer-students/',notes:'NEW — low effort transfer scholarship',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'SciTech Forum AIAA Student Paper Competition',type:'Scholarship',award:'$0',deadline:'Jan 2027',fund_arrival:'Jan 2027',status:'Check Status',link:'https://www.aiaa.org/get-involved/students-young-professionals',notes:'Not a traditional scholarship but a competition that can pay for conference + adds to NASA resume. P',tier:'🟢 APPLY NEXT MONTH',days:278},
-  {name:'College Board Opportunity Scholarships',type:'Scholarship',award:'$40,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://bigfuture.collegeboard.org/pay-for-college/scholarship-search',notes:'Low effort to apply',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Phi Kappa Phi Fellowship (post-transfer)',type:'Scholarship',award:'$35,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.phikappaphi.org/awards-grants/love-of-learning-award',notes:'Join Phi Kappa Phi in first semester at transfer school (GPA 3.5+ typically qualifies). Then apply f',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'American Legion Legacy Scholarship',type:'Scholarship',award:'$20,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.legion.org/get-involved/scholarships/the-american-legion-legacy-scholarship',notes:'Needs-based gap scholarship up to $20K. Verify if Emilio\'s parent has 50%+ VA disability rating — th',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'American Indian College Fund (Transfer)',type:'Scholarship',award:'$20,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://collegefund.org/students/scholarships/',notes:'If Emilio has any Native American heritage beyond Latino+Black, this is a strong option. Verify heri',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'NASA Minority University Research and Education Project (MUREP)',type:'Scholarship',award:'$16,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.nasa.gov/learning-opportunities/',notes:'MUREP internship stipend + potential scholarship tie-in. Not purely scholarship but NASA-paid resear',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'ASME Scholarship (2+2 Transfer Program)',type:'Scholarship',award:'$15,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.asme.org/asme-programs/students-and-faculty/scholarships/4-year-baccalaureate-graduate-students',notes:'Explicitly includes 2+2 Transfer Program track. Must join ASME student chapter (~$25 membership). Op',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Society of Women Engineers (SWE) Scholarship',type:'Scholarship',award:'$15,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://swe.org/scholarships/',notes:'SWE offers 330+ scholarships annually. If Emilio identifies as a woman or gender minority, this unlo',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'UNCF Scholarships',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://opportunities.uncf.org/s/pre-login-welcome-page',notes:'Multiple scholarships — apply to several',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Northrop Grumman Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://www.northropgrumman.com/careers/',notes:'NEW — aerospace/defense corp scholarship + diversity focus',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Raytheon STEM Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://www.rtx.com/our-company/citizenship-and-sustainability',notes:'NEW — defense/aerospace corp + diversity recruitment',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Society of Automotive Engineers (SAE) Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.sae.org/scholarships',notes:'Opens Feb 2027 — mark calendar; aerospace + engineering fit',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Google Generation Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship',notes:'NEW — Google + minority engineering + $10K',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'National Space Club Goddard Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.spaceclub.org/scholarship/',notes:'NEW — $10K space-specific scholarship — direct NASA pipeline fit',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'L3Harris Technologies Scholarship',type:'Scholarship',award:'$10,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://www.l3harris.com/careers/students-and-new-grads',notes:'NEW — aerospace defense corp + diversity recruitment',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Virginia Space Grant Consortium Scholarship',type:'Scholarship',award:'$8,500',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://vsgc.odu.edu/',notes:'NEW — if Elijah attends Virginia Tech this is a strong add-on',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'NC Space Grant Consortium',type:'Scholarship',award:'$8,500',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://spacegrant.net/apps/?pk=ncs1',notes:'NEW — NC RESIDENT + aerospace = direct state NASA grant pipeline — HIGH PRIORITY',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'National Space Grant College and Fellowship Program (NC Space Grant)',type:'Scholarship',award:'$8,500',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://ncspacegrant.org/students/',notes:'CRITICAL: NC resident + aerospace + NASA pipeline. Different from generic NASA internship. Apply thr',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'NASA Space Grant (Virginia track)',type:'Scholarship',award:'$8,500',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://vsgc.odu.edu/',notes:'High value if Emilio attends Virginia Tech. Apply through VSGC after enrollment.',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Georgia Tech Transfer Merit Scholarship',type:'Scholarship',award:'$8,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://finaid.gatech.edu/',notes:'Waiting on admission — GT aerospace is top-tier',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'University of Colorado Boulder Transfer Merit Aid',type:'Scholarship',award:'$8,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.colorado.edu/financialaid/',notes:'ACCEPTED — apply for merit aid immediately',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Purdue University Minority Engineering Scholarship',type:'Scholarship',award:'$6,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://engineering.purdue.edu/Engr/AboutUs/DiversityInitiatives',notes:'Waiting on admission decision',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Hispanic Scholarship Fund',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.hsf.net/scholarship',notes:'Strong fit — Latino + financial need + STEM',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Virginia Tech Transfer Merit Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://sfs.vt.edu/scholarships.html',notes:'ACCEPTED — apply for merit aid immediately',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Ohio State Transfer Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://sfa.osu.edu/',notes:'ACCEPTED — apply for merit aid immediately',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'UNCF/Koch Scholars Program',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://opportunities.uncf.org/s/pre-login-welcome-page',notes:'NEW — Black student STEM scholarship + renewable',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'UNCF STEM Scholars Program (Fund II Foundation)',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://opportunities.uncf.org/s/pre-login-welcome-page',notes:'NEW — Black + STEM + financial need = direct fit',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Microsoft Scholarship Program',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://careers.microsoft.com/students',notes:'NEW — tech giant minority STEM scholarship',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'National Hispanic Media Coalition Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://www.nhmc.org/',notes:'NEW — Latino STEM/tech focus',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Collins Aerospace Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://www.collinsaerospace.com/careers/students-and-recent-graduates',notes:'NEW — Collins = major aerospace corp + diverse hiring push',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Pratt & Whitney Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Opens Soon',link:'https://careers.rtx.com/global/en/pratt-whitney',notes:'NEW — propulsion focus aligns with aerospace/NASA work',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Colorado Space Grant Consortium',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://spacegrant.colorado.edu/',notes:'NEW — if attending CU Boulder this unlocks NASA SGSC pipeline',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'NASA Space Grant Consortium (CU Boulder track)',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://spacegrant.colorado.edu/',notes:'Opens after enrollment at CU Boulder. Activates NASA pipeline funding for undergrads. Apply during f',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Navy League Foundation Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.navyleague.org/what-we-do/our-programs/scholarship-program/',notes:'Specifically Navy/Marine/Coast Guard family. If military parent served in one of these branches, str',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'International Gas Turbine Institute (ASME IGTI) Student Award',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.asme.org/asme-programs/students-and-faculty/scholarships/',notes:'Propulsion-focused engineering award — directly aligned with aerospace/NASA career track.',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Vertical Flight Foundation Scholarship',type:'Scholarship',award:'$5,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.vtol.org/education/vertical-flight-foundation-scholarship',notes:'VTOL/rotorcraft engineering scholarship — NASA relevance (Mars helicopter, etc.). Niche = less compe',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Iowa State University Transfer Scholarship',type:'Scholarship',award:'$4,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.financialaid.iastate.edu/types-of-aid/scholarships/',notes:'ACCEPTED — apply for merit aid immediately',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'NC Community College Transfer Grant',type:'Scholarship',award:'$3,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.cfnc.org/pay-for-college/grants-and-scholarships/',notes:'Direct fit — NC CC transfer with financial need',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Maryland Transfer Merit Scholarship',type:'Scholarship',award:'$3,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://financialaid.umd.edu/',notes:'ACCEPTED — apply for merit aid immediately',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Omega Psi Phi George E. Meares Scholarship',type:'Scholarship',award:'$3,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.omegapsiphifraternity.org/',notes:'NEW — Black male aerospace student — worth applying',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'American Meteorological Society Minority Scholarship',type:'Scholarship',award:'$3,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.ametsoc.org/ams/index.cfm/information-for/students/ams-scholarships-and-fellowships/',notes:'NEW — aerospace-adjacent + minority + financial need',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'P.E.O. Program for Continuing Education (PCE)',type:'Scholarship',award:'$3,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.peointernational.org/peo-programs/program-for-continuing-education/',notes:'Women-focused returning student grant. If Emilio does not identify as a woman, this does not apply. ',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'American Helicopter Society Robert L. Lichten Award',type:'Scholarship',award:'$2,500',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.vtol.org/education/lichten-award',notes:'Academic achievement award for rotary-wing engineering paper. Emilio can write one with faculty advi',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Scholarships for Military Children',type:'Scholarship',award:'$2,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.fisherhouse.org/programs/scholarship-programs/scholarships-for-military-children/',notes:'Military family benefit — straightforward apply',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Alpha Phi Alpha Educational Foundation Scholarship',type:'Scholarship',award:'$2,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.alphaphialpha.net/foundation/',notes:'NEW — Black male merit scholarship',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Imagine America Foundation',type:'Scholarship',award:'$1,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.imagine-america.org/students/',notes:'Low effort — community college transfer',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'David Alan Quick Scholarship (AIAA)',type:'Scholarship',award:'$1,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.aiaa-awards.org/a',notes:'NEW — small but low-competition aerospace specific',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Zeta Phi Beta General Scholarship',type:'Scholarship',award:'$1,000',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.zphib1920.org/nef/',notes:'NEW — low barrier,  community service focus',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'VA Fry Scholarship (Marine Gunnery Sergeant John David Fry)',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.va.gov/education/survivor-dependent-education-assistance/',notes:'NEW — verify Chapter 35 vs Fry eligibility with VA — may stack benefits',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Golden Door Scholars',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://goldendoorscholars.org/',notes:'For children of immigrants with strong need. Latino + Black + military family immigrant background m',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Frederick Douglass Bicentennial Scholarship (UNCF)',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://opportunities.uncf.org/s/pre-login-welcome-page',notes:'NEW — UNCF specific program worth applying to',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'National Scholarship Providers Association',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.scholarshipproviders.org/',notes:'NEW — clearinghouse for multiple scholarships',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Dr. Juan Andrade Jr. Scholarship for Young Hispanic Leaders',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://www.ushli.org/dr-juan-andrade-jr-scholarship-for-young-hispanic-leaders/',notes:'NEW — Latino heritage + PTK/Dean\'s List leadership = strong fit',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'TMCF Gap Completion Grant',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Open Now',link:'https://tmcf.org/scholarships/open-scholarships/',notes:'NEW — emergency/gap funding — rolling deadline',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Daughters of the American Revolution STEM Scholarship',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.dar.org/national-society/scholarships',notes:'NEW — military family + STEM = enhanced fit; contact NC DAR chapter',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'DAR American Indian Scholarship (open to military family)',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.dar.org/national-society/scholarships',notes:'NEW — check specific eligibility; military family + need = possible fit',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'PTK Pearson Scholarship for Higher Education',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.ptk.org/scholarships/',notes:'Targeted for PTK members transitioning from CC to 4-year. Check current cycle at ptk.org — Emilio qu',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'Jose Marti Scholarship Challenge Grant',type:'Scholarship',award:'$0',deadline:'Feb 2027',fund_arrival:'Feb 2027',status:'Check Status',link:'https://www.floridastudentfinancialaidsg.org/SAPHome/SAPHome?url=home',notes:'Florida-only. Does NOT apply to NC resident Emilio unless he enrolls at a Florida school. Note for r',tier:'🟢 APPLY NEXT MONTH',days:306},
-  {name:'DoD SMART Scholarship-for-Service',type:'Grant/Internship',award:'Full tuition + $25000-$38000 annual stipend + health insurance',deadline:'December 2025 (2026-27 cohort)',fund_arrival:'August 2026 (if awarded for Fall 2026 start)',status:'❌ CLOSED - next cycle opens Sept 2026 for Fall 2027',link:'https://www.smartscholarship.org/',notes:'Full-ride scholarship with guaranteed DOD civilian employment post-grad. Aerospace engineering is a perfect fit for defense sector. Emilio should apply for Fall 2027 cohort opening',tier:'⚪ NO DEADLINE',days:999},
-  {name:'NASA OSTEM Internship - Fall 2026',type:'Grant/Internship',award:'~$7500-$18000 (15-week stipend based on academic level)',deadline:'May 22 2026',fund_arrival:'August 2026 (bi-weekly during internship)',status:'✅ OPEN - deadline confirmed',link:'https://stemgateway.nasa.gov/s/',notes:'CONFIRMED open (NASA.gov). US citizen; GPA 3.0+; undergrad through grad. Aerospace engineering is prime fit. 10 wks summer / 15 wks fall. Stipend is ~$25-30/hr. Apply at stemgatewa',tier:'⚪ NO DEADLINE',days:999},
-  {name:'National GEM Consortium MS Fellowship',type:'Grant/Internship',award:'$16000 min stipend (entire MS) + full tuition + 2 paid summer internships',deadline:'November 2025 (2026 cohort)',fund_arrival:'August 2026 (if entering MS program Fall 2026)',status:'❌ CLOSED for Fall 2026 cohort',link:'https://www.gemfellowship.org/gem-fellowship-program/',notes:'For underrepresented students entering MS/PhD in engineering or science. Employer sponsors pay stipend and internships. If Emilio is graduating and heading to grad school Fall 2026',tier:'⚪ NO DEADLINE',days:999},
-  {name:'UNCF General Scholarship Portal (multiple programs)',type:'Grant/Internship',award:'$500-$10000+ (varies by program)',deadline:'Multiple rolling deadlines',fund_arrival:'August 2026',status:'✅ CHECK PORTAL - some programs open year-round',link:'https://opportunities.uncf.org/s/pre-login-welcome-page',notes:'UNCF manages 400+ scholarship programs. Several have rolling deadlines or late-spring openings. Create profile and apply to all matching programs. Key programs: Fund II Foundation ',tier:'⚪ NO DEADLINE',days:999},
-  {name:'Northrop Grumman STEM Scholarship (via UNCF/NSBE partnership)',type:'Grant/Internship',award:'$10000 per year',deadline:'February-March 2026',fund_arrival:'August 2026 (fall disbursement)',status:'❌ CLOSED for 2026-27 AY - check UNCF/NSBE portals',link:'https://www.northropgrumman.com/who-we-are/corporate-responsibility/community/education/',notes:'Northrop Grumman funds scholarships through UNCF and NSBE. Aerospace/engineering focus; minority students preferred. Also check Northrop\'s direct \'HBCU/HSI Grant Program\'. Awards d',tier:'⚪ NO DEADLINE',days:999},
-  {name:'NSF Research Experiences for Undergraduates (REU) - Aerospace Sites',type:'Grant/Internship',award:'$5000-$8000 stipend + housing allowance at many sites',deadline:'Varies by site (summer sites mostly closed; fall sites may be open)',fund_arrival:'May-August 2026 (summer); August 2026 (fall sites)',status:'⚠️ MIXED - check individual site deadlines',link:'https://www.nsf.gov/funding/opportunities/reu-research-experiences-undergraduates',notes:'Individual REU sites set own deadlines. Summer 2026 sites are likely closed. Search for aerospace/mechanical/engineering sites with fall start dates at NSF REU site finder. Many si',tier:'⚪ NO DEADLINE',days:999},
-  {name:'Federal Pell Grant',type:'Grant/Internship',award:'Up to $7395/year (2025-26 AY)',deadline:'FAFSA - rolling (priority by May)',fund_arrival:'August 2026 (with financial aid disbursement)',status:'OPEN - automatic via FAFSA',link:'https://studentaid.gov/understand-aid/types/grants/pell',notes:'Emilio qualifies as Pell-eligible. Automatic need-based grant; no separate application beyond FAFSA. Disbursed by school at start of each semester.',tier:'⚪ NO DEADLINE',days:999},
-  {name:'DOE Science Undergraduate Laboratory Internship (SULI) - Fall 2026',type:'Grant/Internship',award:'~$6800 ($680/week x 10 weeks undergrad)',deadline:'~June 2026 (check site)',fund_arrival:'August-September 2026 (start of fall session)',status:'✅ LIKELY OPEN - fall deadline typically June',link:'https://science.osti.gov/wdts/suli',notes:'CONFIRMED program (DOE.gov). 10-week internship at one of 17 national DOE labs. STEM engineering eligible. Fall session Aug-Dec. Paid weekly stipend + possible travel allowance. St',tier:'⚪ NO DEADLINE',days:999},
-  {name:'NC Space Grant Undergraduate Scholarship',type:'Grant/Internship',award:'$1000-$5000 per academic year',deadline:'February-April 2026 (check NC consortium)',fund_arrival:'August 2026 (fall disbursement)',status:'⚠️ LIKELY CLOSED for Fall 2026; verify with NC State',link:'https://ncspacegrant.ncsu.edu/funding/undergraduate-scholarships/',notes:'NASA-funded; administered through NC Space Grant Consortium at NC State. For NC residents or students at NC institutions in STEM/aerospace. Awards typically paid in fall and spring',tier:'⚪ NO DEADLINE',days:999},
-  {name:'NC Need-Based Grant (NCNG)',type:'Grant/Internship',award:'Up to $5000/year (need-based for NC residents)',deadline:'FAFSA-based (priority by March; late apps accepted)',fund_arrival:'August 2026 (automatic with financial aid)',status:'✅ OPEN - automatic via FAFSA + state form',link:'https://www.ncseaa.edu/nc-grants/',notes:'Automatic for NC residents demonstrating financial need who submit FAFSA. Disbursed by school at semester start. Pell-eligible students prioritized. Free money - no essay required.',tier:'⚪ NO DEADLINE',days:999},
-  {name:'NASA Pathways Internship (Student Trainee - Engineering)',type:'Grant/Internship',award:'~$20-26/hr (GS-4 to GS-5 pay scale)',deadline:'Rolling/open on USAJobs.gov',fund_arrival:'Rolling during internship',status:'✅ OPEN - rolling basis',link:'https://www.usajobs.gov/Search/Results?j=1599',notes:'Civil service pipeline internship; leads to permanent NASA employment post-graduation. Requires 15+ credit hours; 2.9+ GPA; available at multiple NASA centers (Johnson Houston; Ken',tier:'⚪ NO DEADLINE',days:999}
-];
-
-function loadMasterOpps() {
-  var el = document.getElementById("master-grid");
-  if (!el) return;
-  var opps = MASTER_OPPS.slice();
-  var tierOrder = {'🔴 APPLY THIS WEEK': 0, '🟠 APPLY SOON': 1, '🟡 UPCOMING': 2, '🟢 APPLY NEXT MONTH': 3, '⚪ NO DEADLINE': 4};
-  opps.sort(function(a, b) {
-    var ta = tierOrder[a.tier] !== undefined ? tierOrder[a.tier] : 5;
-    var tb = tierOrder[b.tier] !== undefined ? tierOrder[b.tier] : 5;
-    if (ta !== tb) return ta - tb;
-    var da = a.days || 9999; var db = b.days || 9999;
-    if (da !== db) return da - db;
-    var aa = parseFloat((a.award||'').replace(/[^0-9.]/g,''))||0;
-    var ab = parseFloat((b.award||'').replace(/[^0-9.]/g,''))||0;
-    return ab - aa;
-  });
-  var html = '';
-  for (var i = 0; i < opps.length; i++) {
-    var o = opps[i];
-    var tier = o.tier || '⚪ NO DEADLINE';
-    var tierColor = '#7a8ca8';
-    if (tier.indexOf('🔴') > -1) tierColor = '#e74c3c';
-    else if (tier.indexOf('🟠') > -1) tierColor = '#e67e22';
-    else if (tier.indexOf('🟡') > -1) tierColor = '#f1c40f';
-    else if (tier.indexOf('🟢') > -1) tierColor = '#2ecc71';
-    var status = o.status || '';
-    var statusColor = status.indexOf('OPEN') > -1 ? '#2ecc71' : (status.indexOf('CLOSED') > -1 ? '#e74c3c' : '#f5a623');
-    html += '<div class="master-card" style="border-left:4px solid ' + tierColor + '">' +
-      '<div class="master-card-top"><span class="master-tier" style="color:' + tierColor + '">' + tier + '</span>' +
-      '<span class="master-status" style="color:' + statusColor + '">' + status + '</span></div>' +
-      '<div class="master-name"><a href="' + (o.link || '#') + '" target="_blank">' + o.name + '</a></div>' +
-      '<div class="master-meta">' +
-        '<span>💰 ' + (o.award || 'TBD') + '</span>' +
-        '<span>📅 ' + (o.deadline || 'TBD') + '</span>' +
-        '<span>🏦 Arrives: ' + (o.fund_arrival || 'TBD') + '</span>' +
-      '</div>' +
-      (o.notes ? '<div class="master-notes">' + o.notes.substring(0, 120) + (o.notes.length > 120 ? '...' : '') + '</div>' : '') +
-      '</div>';
-  }
-  el.innerHTML = html || '<div style="color:#9aa8bc;padding:20px">No opportunities found.</div>';
-  var countEl = document.getElementById("master-count");
-  if (countEl) countEl.textContent = opps.length + " opportunities loaded";
-}
-
+updateCDs();
+setInterval(updateCDs, 60000);
 </script>
-
-<!-- Master Opportunities Section -->
-<style>
-.master-card{background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.08)}
-.master-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px}
-.master-tier{font-size:0.75rem;font-weight:700}
-.master-status{font-size:0.7rem;font-weight:600}
-.master-name{font-size:0.95rem;font-weight:700;color:#e8eaf0;margin-bottom:8px}
-.master-name a{color:#f5a623}
-.master-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:0.75rem;color:#9aa8bc;margin-bottom:6px}
-.master-notes{font-size:0.72rem;color:#7a8ca8;font-style:italic}
-#master-count{font-size:0.8rem;color:#7a8ca8;margin-bottom:12px}
-</style>
-
-<section id="section-master" class="section" style="padding:16px;max-width:1100px;margin:0 auto">
-  <div class="section-title">🎯 Master Opportunities</div>
-  <p class="section-sub">All 110 curated opportunities — ranked by urgency then deadline then award amount</p>
-  <div id="master-count"></div>
-  <div id="master-grid"><div style="color:#9aa8bc;padding:20px">Click the tab to load opportunities...</div></div>
-</section>
-
 </body>
 </html>

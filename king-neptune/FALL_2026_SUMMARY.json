@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "title": "King Neptune Fall 2026 Scholarships - Money-First Ranking",
+    "generated": "2026-04-27T13:54:00Z",
+    "student": "Emilio Neptune",
+    "major": "Aerospace Engineering",
+    "goal": "NASA career pathway",
+    "methodology": "Ranked by: (1) Fund arrival by Fall 2026, (2) Award amount (highest first), (3) Application status"
+  },
+  
+  "quick_stats": {
+    "total_scholarships_ranked": 86,
+    "apply_this_week": 24,
+    "opens_soon_prep": 12,
+    "total_potential_funding": "$1,200,000+",
+    "avg_award_amount": "$8,500",
+    "highest_award": "$55,000/year (Jack Kent Cooke)"
+  },
+
+  "action_plan_this_week": {
+    "deadline": "Wednesday, April 30, 2026",
+    "priority_actions": [
+      {
+        "rank": 1,
+        "effort": "⭐ 5 minutes",
+        "name": "Scholarships360 $10K No Essay",
+        "amount": "$10,000",
+        "deadline": "Jun 2026",
+        "link": "https://scholarships360.org/scholarships/search/10000-no-essay-scholarship/",
+        "status": "🔴 APPLY THIS WEEK"
+      },
+      {
+        "rank": 2,
+        "effort": "⭐ 15 minutes",
+        "name": "College Board Opportunity Scholarships",
+        "amount": "$500–$40,000",
+        "deadline": "Jun 2027",
+        "link": "https://bigfuture.collegeboard.org/pay-for-college/scholarship-search",
+        "status": "🔴 APPLY THIS WEEK"
+      },
+      {
+        "rank": 3,
+        "effort": "⭐⭐ 30 minutes each",
+        "name": "UNCF Scholarships (3 scholarships, rolling)",
+        "amount": "$2,000–$10,000 each",
+        "deadline": "Feb 2027",
+        "link": "https://opportunities.uncf.org/s/pre-login-welcome-page",
+        "status": "🔴 APPLY THIS WEEK"
+      }
+    ],
+    "target_completion": "At least 3 applications submitted by EOW"
+  },
+
+  "opens_soon_prep": {
+    "window": "September-October 2026 (6 weeks away)",
+    "prepare_now": [
+      {
+        "name": "Jack Kent Cooke Transfer Scholarship",
+        "amount": "$55,000/year",
+        "opens": "Oct 1, 2026",
+        "deadline": "Nov 2026",
+        "prep_required": "Essays (high quality), Recommendations, Transcript",
+        "priority": "🔴 TOP - Highest value transfer scholarship",
+        "notes": "Start essays this week"
+      },
+      {
+        "name": "Elks Most Valuable Student Award",
+        "amount": "$4,000–$50,000",
+        "opens": "Sep 2026",
+        "deadline": "Nov 2026",
+        "prep_required": "Leadership documentation, Essays, Transcript",
+        "priority": "🔴 HIGH - One of largest US youth scholarships",
+        "notes": "Verify transfer eligibility"
+      },
+      {
+        "name": "Lockheed Martin STEM Scholarship",
+        "amount": "$10,000",
+        "opens": "Oct 2026",
+        "deadline": "Jan 2027",
+        "prep_required": "Aerospace resume, Essay, Transcript",
+        "priority": "🟡 MEDIUM - Aerospace industry + direct career pipeline",
+        "notes": "Aerospace company recruiting"
+      }
+    ]
+  },
+
+  "scholarship_tiers": {
+    "tier_1_40000_plus": {
+      "count": 5,
+      "scholarships": [
+        {"name": "Jack Kent Cooke Transfer", "amount": "$55,000/year", "deadline": "Nov 2026"},
+        {"name": "Elks Most Valuable Student", "amount": "$4,000–$50,000", "deadline": "Nov 2026"},
+        {"name": "College Board Opportunity", "amount": "$500–$40,000", "deadline": "Jun 2027"},
+        {"name": "Phi Kappa Phi Fellowship", "amount": "$5,000–$35,000", "deadline": "Feb 2027"},
+        {"name": "Dell Scholars Program", "amount": "$20,000", "deadline": "Nov 2026"}
+      ]
+    },
+
+    "tier_2_20000_to_35000": {
+      "count": 8,
+      "includes": "American Legion Legacy ($20K), Phi Kappa Phi, MUREP internship, etc."
+    },
+
+    "tier_3_aerospace_specific_10000": {
+      "count": 12,
+      "scholarships": [
+        {"name": "Lockheed Martin", "amount": "$10,000", "opens": "Oct 2026"},
+        {"name": "Northrop Grumman", "amount": "$5,000–$10,000", "opens": "Oct 2026"},
+        {"name": "Raytheon STEM", "amount": "$5,000–$10,000", "opens": "Oct 2026"},
+        {"name": "National Space Club Goddard", "amount": "$10,000", "opens": "Nov 2026"},
+        {"name": "AIAA Foundation Suite", "amount": "$2,000–$15,000", "opens": "Nov 2026"},
+        {"name": "Google Generation", "amount": "$10,000", "opens": "Nov 2026"}
+      ]
+    }
+  },
+
+  "military_family_advantage": {
+    "status": "⭐ Emilio has military family background",
+    "military_specific_opportunities": [
+      {"name": "American Legion Legacy", "amount": "Up to $20,000", "note": "VERIFY parent VA disability rating"},
+      {"name": "VA Fry Scholarship", "amount": "Full tuition + housing", "note": "If post-9/11"},
+      {"name": "Military Officers Association (MOAA)", "amount": "$5,000", "note": "If parent is officer"},
+      {"name": "Navy League Foundation", "amount": "$2,500–$5,000", "note": "Navy/Marine family"},
+      {"name": "Air Force Association", "amount": "$1,000–$10,000", "note": "Military + aerospace"},
+      {"name": "Astronaut Scholarship Foundation", "amount": "$15,000", "note": "Military + aerospace = enhanced fit"}
+    ],
+    "estimated_unlocked": "$40,000+",
+    "action_required": "Verify exact military status, disability rating, branch of service"
+  },
+
+  "school_specific_opportunities": {
+    "CU_Boulder": {
+      "scholarships": [
+        {"name": "Colorado Space Grant", "amount": "$1,000–$5,000"},
+        {"name": "CU Boulder Transfer Merit", "amount": "$2,000–$8,000/year"}
+      ],
+      "total_estimated": "$15,000+"
+    },
+    "University_of_Maryland": {
+      "scholarships": [
+        {"name": "Maryland Space Business Roundtable", "amount": "$5,000"},
+        {"name": "NASA Space Grant (VA/MD track)", "amount": "$1,000–$8,500"}
+      ],
+      "total_estimated": "$13,500+"
+    },
+    "Virginia_Tech": {
+      "scholarships": [
+        {"name": "Virginia Tech Transfer Merit", "amount": "$2,000–$5,000/year"},
+        {"name": "NASA Space Grant (VA track)", "amount": "$1,000–$8,500"}
+      ],
+      "total_estimated": "$13,500+"
+    },
+    "NC_Schools": {
+      "scholarships": [
+        {"name": "NC Space Grant (🔴 CRITICAL)", "amount": "$2,500–$8,500"},
+        {"name": "NC Scholars Program", "amount": "$500–$3,000/year"}
+      ],
+      "total_estimated": "$11,500+",
+      "note": "NC resident + aerospace = direct state NASA pipeline"
+    }
+  },
+
+  "recommendations": {
+    "immediate_week_1": [
+      "Apply to Scholarships360 $10K (no essay, 5 min)",
+      "Complete College Board profile (15 min)",
+      "Start UNCF rolling applications (30-60 min for 3 scholarships)",
+      "Prepare Jack Kent Cooke essays (start this week, submit Oct 1)"
+    ],
+
+    "week_2_3": [
+      "Submit all rolling applications (UNCF, College Board, Coca-Cola PTK)",
+      "Join AIAA and NSBE (if not already member)",
+      "Complete NACME application",
+      "Start aerospace company scholarship materials"
+    ],
+
+    "may_august": [
+      "Enroll at 4-year transfer school (Aug 2026)",
+      "Join all school honor societies immediately (Tau Sigma, Phi Kappa Phi, etc.)",
+      "Apply to school-specific scholarships (Space Grant, institutional merit aid)",
+      "Get faculty nominations for competitive scholarships"
+    ]
+  },
+
+  "expected_outcomes": {
+    "conservative_estimate": {
+      "applications": 25,
+      "acceptance_rate": "30%",
+      "awards_expected": "7–8",
+      "avg_per_award": "$5,000–$8,000",
+      "total_conservative": "$35,000–$64,000"
+    },
+    "optimistic_estimate": {
+      "applications": 40,
+      "acceptance_rate": "50%",
+      "awards_expected": "20",
+      "includes": "2–3 major awards ($10K+)",
+      "total_optimistic": "$100,000+"
+    },
+    "realistic_target_2026": "$40,000–$60,000"
+  },
+
+  "files_created": {
+    "FALL_2026_MONEY_RANKED.csv": "Complete 86-scholarship ranking by award amount + fund arrival",
+    "FALL_2026_ACTION_PLAN.md": "Detailed action plan with weekly checklist",
+    "FALL_2026_SUMMARY.json": "This file - quick reference dashboard"
+  },
+
+  "last_updated": "2026-04-27T13:54:00Z"
+}
