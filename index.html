@@ -274,6 +274,7 @@ button{cursor:pointer;font-family:inherit}
     <button class="tab-btn" id="tab-emails">📧 Emails</button>
     <button class="tab-btn" id="tab-schools">🏫 Schools</button>
     <button class="tab-btn" id="tab-money">💵 Money Ranked</button>
+    <button class="tab-btn" id="tab-master">🎯 Master (110)</button>
   </nav>
 </header>
 
@@ -911,7 +912,7 @@ function buildCountdown(targetDate, containerId) {
 // =====================================================================
 // TAB NAVIGATION
 // =====================================================================
-var TABS = ["hero","pipeline","opportunities","essays","emails","schools","money"];
+var TABS = ["hero","pipeline","opportunities","essays","emails","schools","money","master"];
 
 function showTab(name) {
   for (var i = 0; i < TABS.length; i++) {
@@ -935,6 +936,7 @@ document.getElementById("tab-essays").onclick = function() { showTab("essays"); 
 document.getElementById("tab-emails").onclick = function() { showTab("emails"); };
 document.getElementById("tab-schools").onclick = function() { showTab("schools"); };
 document.getElementById("tab-money").onclick = function() { showTab("money"); };
+document.getElementById("tab-master").onclick = function() { showTab("master"); loadMasterOpps(); };
 
 // =====================================================================
 // BUILD PIPELINE
@@ -1513,6 +1515,86 @@ function updateStats() {
 
 updateStats();
 
+// =====================================================================
+// MASTER OPPORTUNITIES (loads from master-opportunities.json)
+// =====================================================================
+var masterLoaded = false;
+function loadMasterOpps() {
+  if (masterLoaded) return;
+  var el = document.getElementById("master-grid");
+  if (!el) return;
+  el.innerHTML = '<div style="color:#9aa8bc;padding:20px">Loading...</div>';
+  fetch('master-opportunities.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      masterLoaded = true;
+      var opps = data.opportunities || [];
+      // Sort: urgency (🔴 first), then days_until_deadline asc, then award desc
+      var tierOrder = {'🔴 APPLY THIS WEEK': 0, '🟠 APPLY SOON': 1, '🟡 UPCOMING': 2, '🟢 APPLY NEXT MONTH': 3, '⚪ NO DEADLINE': 4};
+      opps.sort(function(a, b) {
+        var ta = tierOrder[a.urgency_tier] !== undefined ? tierOrder[a.urgency_tier] : 5;
+        var tb = tierOrder[b.urgency_tier] !== undefined ? tierOrder[b.urgency_tier] : 5;
+        if (ta !== tb) return ta - tb;
+        var da = a.days_until_deadline || 9999;
+        var db = b.days_until_deadline || 9999;
+        if (da !== db) return da - db;
+        var aa = parseFloat((a.award_amount || '').replace(/[^0-9.]/g,'')) || 0;
+        var ab = parseFloat((b.award_amount || '').replace(/[^0-9.]/g,'')) || 0;
+        return ab - aa;
+      });
+      var html = '';
+      for (var i = 0; i < opps.length; i++) {
+        var o = opps[i];
+        var tier = o.urgency_tier || '⚪ NO DEADLINE';
+        var tierColor = '#7a8ca8';
+        if (tier.indexOf('🔴') > -1) tierColor = '#e74c3c';
+        else if (tier.indexOf('🟠') > -1) tierColor = '#e67e22';
+        else if (tier.indexOf('🟡') > -1) tierColor = '#f1c40f';
+        else if (tier.indexOf('🟢') > -1) tierColor = '#2ecc71';
+        var status = o.application_status || '';
+        var statusColor = status.indexOf('OPEN') > -1 ? '#2ecc71' : (status.indexOf('CLOSED') > -1 ? '#e74c3c' : '#f5a623');
+        html += '<div class="master-card" style="border-left:4px solid ' + tierColor + '">' +
+          '<div class="master-card-top"><span class="master-tier" style="color:' + tierColor + '">' + tier + '</span>' +
+          '<span class="master-status" style="color:' + statusColor + '">' + status + '</span></div>' +
+          '<div class="master-name"><a href="' + (o.link || '#') + '" target="_blank">' + o.name + '</a></div>' +
+          '<div class="master-meta">' +
+            '<span>💰 ' + (o.award_amount || 'TBD') + '</span>' +
+            '<span>📅 ' + (o.deadline || 'TBD') + '</span>' +
+            '<span>🏦 Arrives: ' + (o.fund_arrival || 'TBD') + '</span>' +
+          '</div>' +
+          (o.notes ? '<div class="master-notes">' + o.notes.substring(0, 120) + (o.notes.length > 120 ? '...' : '') + '</div>' : '') +
+          '</div>';
+      }
+      el.innerHTML = html || '<div style="color:#9aa8bc;padding:20px">No opportunities found.</div>';
+      var countEl = document.getElementById("master-count");
+      if (countEl) countEl.textContent = opps.length + ' opportunities';
+    })
+    .catch(function(e) {
+      el.innerHTML = '<div style="color:#e74c3c;padding:20px">Error loading data: ' + e.message + '</div>';
+    });
+}
+
 </script>
+
+<!-- Master Opportunities Section -->
+<style>
+.master-card{background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.08)}
+.master-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px}
+.master-tier{font-size:0.75rem;font-weight:700}
+.master-status{font-size:0.7rem;font-weight:600}
+.master-name{font-size:0.95rem;font-weight:700;color:#e8eaf0;margin-bottom:8px}
+.master-name a{color:#f5a623}
+.master-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:0.75rem;color:#9aa8bc;margin-bottom:6px}
+.master-notes{font-size:0.72rem;color:#7a8ca8;font-style:italic}
+#master-count{font-size:0.8rem;color:#7a8ca8;margin-bottom:12px}
+</style>
+
+<section id="section-master" class="section" style="padding:16px;max-width:1100px;margin:0 auto">
+  <div class="section-title">🎯 Master Opportunities</div>
+  <p class="section-sub">All 110 curated opportunities — ranked by urgency then deadline then award amount</p>
+  <div id="master-count"></div>
+  <div id="master-grid"><div style="color:#9aa8bc;padding:20px">Click the tab to load opportunities...</div></div>
+</section>
+
 </body>
 </html>
