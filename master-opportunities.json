@@ -2,11 +2,11 @@
   "total_opportunities": 110,
   "generated_at": "2026-04-29T00:00:00Z",
   "by_tier": {
-    "this_week": 0,
+    "this_week": 1,
     "next_week": 0,
     "this_month": 1,
     "next_month": 87,
-    "past_deadline": 17,
+    "past_deadline": 16,
     "no_deadline": 5
   },
   "opportunities": [
@@ -158,12 +158,12 @@
       "name": "SHPE Foundation Scholarship",
       "type": "Grant/Internship",
       "award_amount": "$1000-$10000 (multiple tiers)",
-      "days_until_deadline": -28,
-      "deadline": "April 2026",
+      "days_until_deadline": 1,
+      "deadline": "April 30, 2026",
       "fund_arrival": "August 2026 (fall disbursement to school)",
-      "application_status": "⚠️ POSSIBLY STILL OPEN - check SHPE portal immediately",
+      "application_status": "🚨 OPEN - DEADLINE TOMORROW April 30, 2026 — APPLY NOW via ScholarSHPE common app",
       "link": "https://shpe.org/scholarships/",
-      "notes": "Society of Hispanic Professional Engineers annual scholarship. SHPE membership required (typically ~$35 student rate). Aerospace/engineering priority. Deadline often falls in April. Contact SHPE national office to confirm if Fall 2026 cycle is still accepting. Strong candidate profile match.",
+      "notes": "Society of Hispanic Professional Engineers annual scholarship. SHPE membership required (typically ~$35 student rate). Aerospace/engineering priority. Deadline often falls in April. Contact SHPE national office to confirm if Fall 2026 cycle is still accepting. Strong candidate profile match. CRITICAL: ScholarSHPE 2026-27 common app deadline is April 30, 2026. Must be SHPE member. Apply at shpe.org/engage/programs/scholarshpe/",
       "urgency_tier": "🔴 APPLY THIS WEEK"
     },
     {
